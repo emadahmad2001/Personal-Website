@@ -1,87 +1,180 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="description" content="About Emad Ahmad">
-        <meta name="keywords" content="Emad Ahmad, Computer Science, Basketball">
-        <meta name="author" content="Emad Ahmad">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-            <title>Emad Ahmad</title>
-        <link rel="stylesheet" type="text/css" href="A2.css">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Open+Sans&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
-    <body>
-        <header class="home">
-            <nav>
-                <ul>
-                    <a href="index.html">
-                    <img class="logo" src="media/EmadLogo.png" alt="logo">
-                    </a>
-                    <li><a href="contact.html">Contact Me</a></li>
-                    <li><a href="proffesion.html">Proffesion</a></li>
-                    <li><a href="lifestyle.html">Lifestyle</a></li>
-                    <li><a class="active" href="index.html">Home</a></li>
-                </ul>
-            </nav>
-            <div class="intro">
-                <h1>
-                    Emad Ahmad
-                </h1>
-                <h2>
-                    4th year Computer Science student
-                </h2>
-                <a href="media/Emad Resume-converted.pdf">
-                <button>Resume</button>
-                </a>
-                <a onclick="window.open('https://www.linkedin.com/in/emad-ahmad-15a43714b/');"
-                title="">
-                <button type="button1" name="button1">Profile</button>
-              </a>
-            </div>
-        </header>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Emad Ahmad's Portfolio - Software Developer & AI Engineer">
+  <title>Emad Ahmad - Portfolio</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav>
+      <div class="logo">Emad Ahmad</div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+      <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </nav>
+  </header>
 
-        <div class="about">
-          <div class="introPic"></div>
-          <div class="aboutsummary">
-                <h1>About Me</h1>
-                <br>
-                <p>
-                  Hey everyone, my name is Emad. I'm a second year
-                  computer science student at UofT Mississauga. A bit more
-                  about me, is that I also live in Mississauga and love
-                  representing my home.
-                </p>
-                <p>
-                  This Webpage will have more info about
-                  me, from both a lifestyle side and professional side.
-                  I am open to connect with anyone, and keep in touch to talk
-                  about our topics of intrests. Hope y'all enjoy :)
-                </p>
-                <a href="contact.html">Gimme a Message!</a>
-            </div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Hi, I'm Emad Ahmad</h1>
+      <p>Software Developer & AI Engineer | Building innovative solutions with code and creativity.</p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn">View My Work</a>
+        <a href="#contact" class="btn btn-outline">Contact Me</a>
+      </div>
+    </div>
+  </section>
 
+  <!-- About Section -->
+  <section id="about" class="about">
+    <h2>About Me</h2>
+    <p>I'm a passionate developer with expertise in Salesforce, AI, and full-stack development. I specialize in designing scalable solutions and leveraging cutting-edge technologies to solve real-world problems. With experience in agile frameworks and a strong foundation in computer science and statistics, I thrive in dynamic and collaborative environments.</p>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <h3>Programming</h3>
+        <div class="skill-list">
+          <span>Python</span>
+          <span>Java</span>
+          <span>JavaScript</span>
+          <span>SQL</span>
+          <span>HTML/CSS</span>
+          <span>Bash</span>
         </div>
+      </div>
+      <div class="skill-category">
+        <h3>Technologies</h3>
+        <div class="skill-list">
+          <span>Salesforce</span>
+          <span>Node.js</span>
+          <span>React.js</span>
+          <span>AWS</span>
+          <span>Docker</span>
+          <span>PyTorch</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3>Frameworks & Tools</h3>
+        <div class="skill-list">
+          <span>Git</span>
+          <span>Agile</span>
+          <span>Jira</span>
+          <span>Django</span>
+          <span>MongoDB</span>
+          <span>Cypress.js</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Experience Section -->
+  <section id="experience" class="experience">
+    <h2>Experience</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h3>Software Developer – Salesforce & CRM</h3>
+        <p><strong>Cloud SynApps, Inc.</strong> | Jul 2024 – Present</p>
+        <ul>
+          <li>Designed and deployed custom Salesforce solutions using Lightning Web Components, Apex, and OmniStudio tools.</li>
+          <li>Led key projects like the City of Kalamazoo CRM integration, improving data migration and automation processes.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <h3>AI Software Engineer</h3>
+        <p><strong>Ecomtent.ai</strong> | Jan 2024 – Jul 2024</p>
+        <ul>
+          <li>Optimized AI models using Python frameworks like PyTorch and TensorFlow, achieving a 30% increase in engagement for Amazon sellers.</li>
+          <li>Streamlined model deployment using Docker and GCP.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <h3>Software Developer</h3>
+        <p><strong>Environment Canada</strong> | May 2022 – Aug 2023</p>
+        <ul>
+          <li>Developed ETL pipelines for meteorological data using Python, Bash, and PostgreSQL.</li>
+          <li>Enhanced data submission portals with React.js and Node.js, improving navigation by 30%.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-        <footer class="footer">
-            <div>
-                <h1>CONTACT ME</h1>
-                <ul>
-                    <li><a href="mailto:eahmad729@gmail.com">eahmad729@gmail.com</a></li>
-                    <li><a href="Tel: 416-312-6691">416-312-6691</a></li>
-                </ul>
-            </div>
-            <div>
-                <h1>Socials</h1>
-                <a id="idLinkedInIcon"
-                onclick="window.open('https://www.linkedin.com/in/emad-ahmad-15a43714b/');"
-                title="">in</a>
-            </div>
+  <!-- Projects Section -->
+  <section id="projects" class="projects">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <img src="assets/images/chatbot.jpg" alt="Machine Learning ChatBot">
+        <h3>Machine Learning ChatBot</h3>
+        <p>Developed a chatbot using PyTorch and fine-tuned Meta AI's LLaMa 2 model for improved performance.</p>
+        <a href="#" class="btn">View Project</a>
+      </div>
+      <div class="project-card">
+        <img src="assets/images/nba-predictor.jpg" alt="NBA Injury Stat Predictor">
+        <h3>NBA Injury Stat Predictor</h3>
+        <p>Built a Python script using scikit-learn to predict player stats based on injury status and performance.</p>
+        <a href="#" class="btn">View Project</a>
+      </div>
+      <div class="project-card">
+        <img src="assets/images/spotify-playlist.jpg" alt="Spotify Playlist Generator">
+        <h3>Spotify Playlist Generator</h3>
+        <p>Integrated YouTube and Spotify APIs to create personalized playlists based on voice analysis.</p>
+        <a href="#" class="btn">View Project</a>
+      </div>
+    </div>
+  </section>
 
-        </footer>
+  <!-- Education Section -->
+  <section id="education" class="education">
+    <h2>Education</h2>
+    <div class="education-item">
+      <h3>University of Toronto</h3>
+      <p><strong>B.S. in Computer Science & Statistics</strong> | Graduated Dec 2023</p>
+      <p>Related Coursework: Data Structures & Algorithms, Machine Learning, Artificial Intelligence, Object-Oriented Programming.</p>
+      <p>Notable Roles: Teaching Assistant, Research Assistant, Varsity Basketball Analytics Team Lead.</p>
+    </div>
+  </section>
 
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <h2>Contact Me</h2>
+    <form action="#" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+    <div class="social-links">
+      <a href="https://github.com/emadahmad2001" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com/in/your-profile" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </section>
 
-    </body>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 Emad Ahmad. All rights reserved.</p>
+  </footer>
+
+  <script src="assets/js/script.js"></script>
+</body>
 </html>
