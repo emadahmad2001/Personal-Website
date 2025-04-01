@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Emad Ahmad's Portfolio - Software Developer & AI Engineer">
   <title>Emad Ahmad - Portfolio</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="assets/css/styles.css">
-  <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <!-- Header -->
   <header>
     <nav>
-      <div class="logo">Emad Ahmad</div>
+      <div class="logo">EA</div>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
@@ -32,6 +32,11 @@
 
   <!-- Hero Section -->
   <section class="hero">
+    <div class="floating-elements">
+      <div class="floating-element"></div>
+      <div class="floating-element"></div>
+      <div class="floating-element"></div>
+    </div>
     <div class="hero-content">
       <h1>Hi, I'm Emad Ahmad</h1>
       <p>Software Developer & AI Engineer | Building innovative solutions with code and creativity.</p>
@@ -39,13 +44,38 @@
         <a href="#projects" class="btn">View My Work</a>
         <a href="assets/images/EmadResume2025Updated.pdf" target="_blank" class="btn btn-outline">View Resume</a>
       </div>
+      <div class="scroll-indicator">
+        <span>Scroll Down</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
     </div>
   </section>
 
   <!-- About Section -->
   <section id="about" class="about">
     <h2>About Me</h2>
-    <p>I'm a passionate developer with expertise in Salesforce, AI, and full-stack development. I specialize in designing scalable solutions and leveraging cutting-edge technologies to solve real-world problems. With experience in agile frameworks and a strong foundation in computer science and statistics, I thrive in dynamic and collaborative environments.</p>
+    <div class="about-content">
+      <div class="about-text">
+        <p>I'm a passionate developer with expertise in Salesforce, AI, and full-stack development. I specialize in designing scalable solutions and leveraging cutting-edge technologies to solve real-world problems. With experience in agile frameworks and a strong foundation in computer science and statistics, I thrive in dynamic and collaborative environments.</p>
+        <div class="about-stats">
+          <div class="stat">
+            <span class="stat-number">3+</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">20+</span>
+            <span class="stat-label">Projects Completed</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">15+</span>
+            <span class="stat-label">Technologies</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-image">
+        <img src="https://placehold.co/300x400/2563eb/ffffff?text=Emad+Ahmad" alt="Emad Ahmad">
+      </div>
+    </div>
   </section>
 
   <!-- Skills Section -->
@@ -53,7 +83,7 @@
     <h2>Skills</h2>
     <div class="skills-grid">
       <div class="skill-category">
-        <h3>Programming</h3>
+        <h3><i class="fas fa-code"></i> Programming</h3>
         <div class="skill-list">
           <span>Python</span>
           <span>Java</span>
@@ -64,7 +94,7 @@
         </div>
       </div>
       <div class="skill-category">
-        <h3>Technologies</h3>
+        <h3><i class="fas fa-microchip"></i> Technologies</h3>
         <div class="skill-list">
           <span>Salesforce</span>
           <span>Node.js</span>
@@ -75,7 +105,7 @@
         </div>
       </div>
       <div class="skill-category">
-        <h3>Frameworks & Tools</h3>
+        <h3><i class="fas fa-tools"></i> Frameworks & Tools</h3>
         <div class="skill-list">
           <span>Git</span>
           <span>Agile</span>
@@ -93,31 +123,37 @@
     <h2>Experience</h2>
     <div class="timeline">
       <div class="timeline-item">
-        <img src="assets/images/Cloud-Synapps-Brand-Logo.png" alt="Cloud SynApps Logo" class="company-logo">
-        <h3>Software Developer – Salesforce & CRM</h3>
-        <p><strong>Cloud SynApps, Inc.</strong> | Jul 2024 – Present</p>
-        <ul>
-          <li>Designed and deployed custom Salesforce solutions using Lightning Web Components, Apex, and OmniStudio tools.</li>
-          <li>Led key projects like the City of Kalamazoo CRM integration, improving data migration and automation processes.</li>
-        </ul>
+        <div class="timeline-content">
+          <img src="assets/images/Cloud-Synapps-Brand-Logo.png" alt="Cloud SynApps Logo" class="company-logo">
+          <h3>Software Developer – Salesforce & CRM</h3>
+          <p class="company"><strong>Cloud SynApps, Inc.</strong> | Jul 2024 – Present</p>
+          <ul>
+            <li>Designed and deployed custom Salesforce solutions using Lightning Web Components, Apex, and OmniStudio tools.</li>
+            <li>Led key projects like the City of Kalamazoo CRM integration, improving data migration and automation processes.</li>
+          </ul>
+        </div>
       </div>
       <div class="timeline-item">
-        <img src="assets/images/Ecomtent.png" alt="Ecomtent Logo" class="company-logo">
-        <h3>AI Software Engineer</h3>
-        <p><strong>Ecomtent.ai</strong> | Jan 2024 – Jul 2024</p>
-        <ul>
-          <li>Optimized AI models using Python frameworks like PyTorch and TensorFlow, achieving a 30% increase in engagement for Amazon sellers.</li>
-          <li>Streamlined model deployment using Docker and GCP.</li>
-        </ul>
+        <div class="timeline-content">
+          <img src="assets/images/Ecomtent.png" alt="Ecomtent Logo" class="company-logo">
+          <h3>AI Software Engineer</h3>
+          <p class="company"><strong>Ecomtent.ai</strong> | Jan 2024 – Jul 2024</p>
+          <ul>
+            <li>Optimized AI models using Python frameworks like PyTorch and TensorFlow, achieving a 30% increase in engagement for Amazon sellers.</li>
+            <li>Streamlined model deployment using Docker and GCP.</li>
+          </ul>
+        </div>
       </div>
       <div class="timeline-item">
-        <img src="assets/images/environment-canada-logo.jpg" alt="Environment Canada Logo" class="company-logo">
-        <h3>Software Developer</h3>
-        <p><strong>Environment Canada</strong> | May 2022 – Aug 2023</p>
-        <ul>
-          <li>Developed ETL pipelines for meteorological data using Python, Bash, and PostgreSQL.</li>
-          <li>Enhanced data submission portals with React.js and Node.js, improving navigation by 30%.</li>
-        </ul>
+        <div class="timeline-content">
+          <img src="assets/images/environment-canada-logo.jpg" alt="Environment Canada Logo" class="company-logo">
+          <h3>Software Developer</h3>
+          <p class="company"><strong>Environment Canada</strong> | May 2022 – Aug 2023</p>
+          <ul>
+            <li>Developed ETL pipelines for meteorological data using Python, Bash, and PostgreSQL.</li>
+            <li>Enhanced data submission portals with React.js and Node.js, improving navigation by 30%.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -127,22 +163,58 @@
     <h2>Projects</h2>
     <div class="projects-grid">
       <div class="project-card">
-        <!-- <img src="assets/images/chatbot.jpg" alt="Machine Learning ChatBot"> -->
+        <div class="project-image">
+          <img src="https://placehold.co/600x400/2563eb/ffffff?text=ML+ChatBot" alt="Machine Learning ChatBot">
+          <div class="project-overlay">
+            <div class="project-links">
+              <a href="https://github.com/emadahmad2001/TAChatBot" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="#" class="demo-link"><i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+        </div>
         <h3>Machine Learning ChatBot</h3>
         <p>Developed a chatbot using PyTorch and fine-tuned Meta AI's LLaMa 2 model for improved performance.</p>
-        <a href="https://github.com/emadahmad2001/TAChatBot" target="_blank" class="btn">View Project</a>
+        <div class="project-tech">
+          <span>Python</span>
+          <span>PyTorch</span>
+          <span>NLP</span>
+        </div>
       </div>
       <div class="project-card">
-        <!-- <img src="assets/images/nba-predictor.jpg" alt="NBA Injury Stat Predictor"> -->
+        <div class="project-image">
+          <img src="https://placehold.co/600x400/2563eb/ffffff?text=NBA+Predictor" alt="NBA Injury Stat Predictor">
+          <div class="project-overlay">
+            <div class="project-links">
+              <a href="https://github.com/emadahmad2001/Nba-Injury-Stat-Predictor" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="#" class="demo-link"><i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+        </div>
         <h3>NBA Injury Stat Predictor</h3>
         <p>Built a Python script using scikit-learn to predict player stats based on injury status and performance.</p>
-        <a href="https://github.com/emadahmad2001/Nba-Injury-Stat-Predictor" target="_blank" class="btn">View Project</a>
+        <div class="project-tech">
+          <span>Python</span>
+          <span>scikit-learn</span>
+          <span>Data Analysis</span>
+        </div>
       </div>
       <div class="project-card">
-        <!-- <img src="assets/images/spotify-playlist.jpg" alt="Spotify Playlist Generator"> -->
+        <div class="project-image">
+          <img src="https://placehold.co/600x400/2563eb/ffffff?text=Spotify+Generator" alt="Spotify Playlist Generator">
+          <div class="project-overlay">
+            <div class="project-links">
+              <a href="https://github.com/emadahmad2001/Spotify-Playlist-Generator" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="#" class="demo-link"><i class="fas fa-external-link-alt"></i></a>
+            </div>
+          </div>
+        </div>
         <h3>Spotify Playlist Generator</h3>
         <p>Integrated YouTube and Spotify APIs to create personalized playlists based on voice analysis.</p>
-        <a href="https://github.com/emadahmad2001/Spotify-Playlist-Generator" target="_blank" class="btn">View Project</a>
+        <div class="project-tech">
+          <span>Python</span>
+          <span>API Integration</span>
+          <span>Voice Analysis</span>
+        </div>
       </div>
     </div>
   </section>
@@ -151,37 +223,78 @@
   <section id="education" class="education">
     <h2>Education</h2>
     <div class="education-item">
-      <img src="assets/images/University_of_Toronto-Logo.png" alt="University of Toronto Logo" class="education-logo">
-      <h3>University of Toronto</h3>
-      <p><strong>B.S. in Computer Science & Statistics</strong> | Graduated Dec 2023</p>
-      <p>Related Coursework: Data Structures & Algorithms, Machine Learning, Artificial Intelligence, Object-Oriented Programming.</p>
-      <p>Notable Roles: Teaching Assistant, Research Assistant, Varsity Basketball Analytics Team Lead.</p>
+      <div class="education-content">
+        <img src="assets/images/University_of_Toronto-Logo.png" alt="University of Toronto Logo" class="education-logo">
+        <div class="education-details">
+          <h3>University of Toronto</h3>
+          <p class="degree"><strong>B.S. in Computer Science & Statistics</strong> | Graduated Dec 2023</p>
+          <p class="coursework">Related Coursework: Data Structures & Algorithms, Machine Learning, Artificial Intelligence, Object-Oriented Programming.</p>
+          <div class="education-achievements">
+            <div class="achievement">
+              <i class="fas fa-chalkboard-teacher"></i>
+              <span>Teaching Assistant</span>
+            </div>
+            <div class="achievement">
+              <i class="fas fa-flask"></i>
+              <span>Research Assistant</span>
+            </div>
+            <div class="achievement">
+              <i class="fas fa-basketball-ball"></i>
+              <span>Varsity Basketball Analytics Team Lead</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-
-<!-- Contact Section -->
-<section id="contact" class="contact">
-  <h2>Contact Me</h2>
-  <form action="#" method="POST">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <textarea name="message" placeholder="Your Message" required></textarea>
-    <button type="submit" class="btn">Send Message</button>
-  </form>
-  <div class="social-links">
-    <a href="https://github.com/emadahmad2001" target="_blank" class="btn-social github">
-      <i class="fab fa-github"></i> GitHub
-    </a>
-    <a href="https://linkedin.com/in/your-profile" target="_blank" class="btn-social linkedin">
-      <i class="fab fa-linkedin"></i> LinkedIn
-    </a>
-  </div>
-</section>
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <h2>Contact Me</h2>
+    <div class="contact-container">
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <p>eahmad729@gmail.com</p>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <p>Toronto, Canada</p>
+        </div>
+      </div>
+      <form class="contact-form">
+        <div class="form-group">
+          <input type="text" name="name" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Your Email" required>
+        </div>
+        <div class="form-group">
+          <textarea name="message" placeholder="Your Message" required></textarea>
+        </div>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </div>
+    <div class="social-links">
+      <a href="https://github.com/emadahmad2001" target="_blank" class="btn-social github">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/emad-ahmad-15a43714b/" target="_blank" class="btn-social linkedin">
+        <i class="fab fa-linkedin"></i> LinkedIn
+      </a>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Emad Ahmad. All rights reserved.</p>
+    <div class="footer-content">
+      <p>&copy; 2025 Emad Ahmad. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
   </footer>
 
   <script src="assets/js/script.js"></script>
