@@ -131,22 +131,47 @@ document.addEventListener('DOMContentLoaded', () => {
         heroContent.style.opacity = 1 - (scrolled * 0.003);
     });
 
-    // Enhanced mobile menu
+    // Mobile Menu Handling
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
+    const navLinksItems = document.querySelectorAll('.nav-links a');
 
     hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
         hamburger.classList.toggle('active');
-        document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+        navLinks.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking a link
+    navLinksItems.forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
     });
 
     // Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {
         if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-            navLinks.classList.remove('active');
             hamburger.classList.remove('active');
-            document.body.style.overflow = 'auto';
+            navLinks.classList.remove('active');
+        }
+    });
+
+    // Prevent scrolling when mobile menu is open
+    function toggleScroll(disable) {
+        document.body.style.overflow = disable ? 'hidden' : '';
+    }
+
+    hamburger.addEventListener('click', () => {
+        toggleScroll(navLinks.classList.contains('active'));
+    });
+
+    // Touch event handling for mobile
+    document.addEventListener('touchstart', (e) => {
+        if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            toggleScroll(false);
         }
     });
 
