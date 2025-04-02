@@ -364,4 +364,132 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     `;
     document.head.appendChild(style);
+
+    // Image Viewer Functions - Global Scope
+    let currentImageIndex = 0;
+    let images = [];
+
+    function initializeImageViewer() {
+        // Get all gallery images from the Pokemon project
+        const galleryImages = document.querySelectorAll('.project-card .gallery-image');
+        images = Array.from(galleryImages).map(img => img.src);
+        
+        // Update total images counter
+        document.getElementById('totalImages').textContent = images.length;
+
+        // Add click event listeners to all gallery images
+        galleryImages.forEach(img => {
+            img.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                openImageViewer(this.src);
+            });
+        });
+    }
+
+    function openImageViewer(imageSrc) {
+        const viewer = document.getElementById('imageViewer');
+        const viewerImage = document.getElementById('viewerImage');
+        
+        // Initialize images array if not already done
+        if (images.length === 0) {
+            initializeImageViewer();
+        }
+        
+        // Find the index of the clicked image
+        currentImageIndex = images.indexOf(imageSrc);
+        if (currentImageIndex === -1) currentImageIndex = 0;
+        
+        // Update the viewer
+        updateImageViewer();
+        viewer.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function updateImageViewer() {
+        const viewerImage = document.getElementById('viewerImage');
+        const currentIndexElement = document.getElementById('currentImageIndex');
+        
+        // Update image source
+        viewerImage.src = images[currentImageIndex];
+        
+        // Update counter
+        currentIndexElement.textContent = currentImageIndex + 1;
+        
+        // Add fade effect
+        viewerImage.style.opacity = '0';
+        setTimeout(() => {
+            viewerImage.style.opacity = '1';
+        }, 50);
+    }
+
+    function navigateImages(direction) {
+        currentImageIndex = (currentImageIndex + direction + images.length) % images.length;
+        updateImageViewer();
+    }
+
+    function closeImageViewer() {
+        const viewer = document.getElementById('imageViewer');
+        viewer.classList.remove('active');
+        document.body.style.overflow = '';
+        currentImageIndex = 0;
+    }
+
+    // Initialize image viewer
+    initializeImageViewer();
+
+    // Add event listeners for navigation and closing
+    const imageViewer = document.getElementById('imageViewer');
+    
+    // Handle navigation and close buttons
+    imageViewer.addEventListener('click', function(e) {
+        const action = e.target.closest('[data-action]')?.dataset.action;
+        
+        if (action === 'close') {
+            closeImageViewer();
+        } else if (action === 'prev') {
+            navigateImages(-1);
+        } else if (action === 'next') {
+            navigateImages(1);
+        } else if (e.target === this) {
+            closeImageViewer();
+        }
+    });
+
+    // Close viewer with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeImageViewer();
+        } else if (e.key === 'ArrowLeft') {
+            navigateImages(-1);
+        } else if (e.key === 'ArrowRight') {
+            navigateImages(1);
+        }
+    });
+
+    // Add touch swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.getElementById('viewerImage').addEventListener('touchstart', function(e) {
+        touchStartX = e.touches[0].clientX;
+    });
+
+    document.getElementById('viewerImage').addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].clientX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                navigateImages(1); // Swipe left
+            } else {
+                navigateImages(-1); // Swipe right
+            }
+        }
+    }
 });

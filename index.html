@@ -164,20 +164,27 @@
     <div class="projects-grid">
       <div class="project-card">
         <div class="project-image">
-          <img src="https://placehold.co/600x400/2563eb/ffffff?text=ML+ChatBot" alt="Machine Learning ChatBot">
+          <img src="assets/images/selection.PNG" alt="Pokemon Simulator API">
           <div class="project-overlay">
             <div class="project-links">
-              <a href="https://github.com/emadahmad2001/TAChatBot" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="https://github.com/emadahmad2001/Pokemon-Simulator-API" target="_blank"><i class="fab fa-github"></i></a>
               <a href="#" class="demo-link"><i class="fas fa-external-link-alt"></i></a>
             </div>
           </div>
         </div>
-        <h3>Machine Learning ChatBot</h3>
-        <p>Developed a chatbot using PyTorch and fine-tuned Meta AI's LLaMa 2 model for improved performance.</p>
+        <h3>Pokemon Simulator API</h3>
+        <p>Created a comprehensive Pokemon battle simulator API that allows users to select Pokemon, view their stats, and simulate battles. Features include type effectiveness calculations, stat-based damage formulas, and an interactive battle interface.</p>
         <div class="project-tech">
           <span>Python</span>
-          <span>PyTorch</span>
-          <span>NLP</span>
+          <span>TypeScript</span>
+          <span>React</span>
+          <span>FastAPI</span>
+          <span>REST API</span>
+          <span>Game Logic</span>
+        </div>
+        <div class="project-gallery">
+          <img src="assets/images/selection.PNG" alt="Pokemon Selection Interface" class="gallery-image">
+          <img src="assets/images/results.png" alt="Battle Results" class="gallery-image">
         </div>
       </div>
       <div class="project-card">
@@ -296,6 +303,19 @@
       </div>
     </div>
   </footer>
+
+  <!-- Image Viewer Modal -->
+  <div class="image-viewer" id="imageViewer">
+    <span class="close-viewer" data-action="close">&times;</span>
+    <button class="nav-button prev" data-action="prev"><i class="fas fa-chevron-left"></i></button>
+    <button class="nav-button next" data-action="next"><i class="fas fa-chevron-right"></i></button>
+    <div class="image-container">
+      <img src="" alt="Project Screenshot" id="viewerImage">
+    </div>
+    <div class="image-counter">
+      <span id="currentImageIndex">1</span> / <span id="totalImages">2</span>
+    </div>
+  </div>
 
   <script src="assets/js/script.js"></script>
 </body>
