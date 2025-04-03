@@ -269,7 +269,7 @@
           <p>Toronto, Canada</p>
         </div>
       </div>
-      <form class="contact-form">
+      <form class="contact-form" action="https://formspree.io/f/xdkewdqj" method="POST">
         <div class="form-group">
           <input type="text" name="name" placeholder="Your Name" required>
         </div>
@@ -280,6 +280,10 @@
           <textarea name="message" placeholder="Your Message" required></textarea>
         </div>
         <button type="submit" class="btn">Send Message</button>
+        <div class="form-status">
+          <div class="success-message">Message sent successfully! I'll get back to you soon.</div>
+          <div class="error-message">Oops! Something went wrong. Please try again.</div>
+        </div>
       </form>
     </div>
     <div class="social-links">

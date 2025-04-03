@@ -175,46 +175,53 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Enhanced form validation and submission
+    // Contact Form Handling
     const contactForm = document.querySelector('.contact-form');
+    const formStatus = document.querySelector('.form-status');
+    const successMessage = document.querySelector('.success-message');
+    const errorMessage = document.querySelector('.error-message');
+
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // Basic form validation
-            const name = contactForm.querySelector('input[name="name"]').value;
-            const email = contactForm.querySelector('input[name="email"]').value;
-            const message = contactForm.querySelector('textarea[name="message"]').value;
-
-            if (!name || !email || !message) {
-                showNotification('Please fill in all fields', 'error');
-                return;
-            }
-
-            if (!isValidEmail(email)) {
-                showNotification('Please enter a valid email address', 'error');
-                return;
-            }
-
-            // Show loading state
+            // Disable submit button and show loading state
             const submitButton = contactForm.querySelector('button[type="submit"]');
-            const originalText = submitButton.textContent;
-            submitButton.textContent = 'Sending...';
+            const originalButtonText = submitButton.textContent;
             submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
 
             try {
-                // Simulate form submission (replace with actual API call)
-                await new Promise(resolve => setTimeout(resolve, 1500));
-                
-                // Show success message
-                showNotification('Message sent successfully!', 'success');
-                contactForm.reset();
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: new FormData(contactForm),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Show success message
+                    successMessage.style.display = 'block';
+                    errorMessage.style.display = 'none';
+                    contactForm.reset();
+                } else {
+                    throw new Error('Form submission failed');
+                }
             } catch (error) {
-                showNotification('Failed to send message. Please try again.', 'error');
+                // Show error message
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
             } finally {
                 // Reset button state
-                submitButton.textContent = originalText;
                 submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+
+                // Hide messages after 5 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                    errorMessage.style.display = 'none';
+                }, 5000);
             }
         });
     }
