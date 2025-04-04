@@ -1409,3 +1409,325 @@ footer {
     background-color: rgba(239, 68, 68, 0.15);
     border-color: rgba(239, 68, 68, 0.3);
 }
+
+/* Beyond Code Section */
+.beyond-code {
+  padding: 5rem 2rem;
+  background: var(--bg-secondary);
+  position: relative;
+  overflow: hidden;
+}
+
+.beyond-code::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(206, 17, 65, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 30%, rgba(255, 203, 5, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(107, 78, 113, 0.08) 0%, transparent 40%);
+  z-index: 0;
+}
+
+.beyond-code-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.beyond-code h2 {
+  text-align: center;
+  color: var(--text-primary);
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.interests-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.interests-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.interest-card {
+  background: var(--bg-primary);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.interest-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.05;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.interest-card:hover::after {
+  opacity: 0.1;
+}
+
+.basketball::after {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23CE1141"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>');
+}
+
+.pokemon::after {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FFCB05"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>');
+}
+
+.anime::after {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%236B4E71"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>');
+}
+
+.interest-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.interest-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  transition: height 0.3s ease;
+}
+
+.interest-card:hover::before {
+  height: 100%;
+  opacity: 0.1;
+}
+
+.basketball::before {
+  background: #CE1141; /* Raptors Red */
+}
+
+.pokemon::before {
+  background: #FFCB05; /* Pokemon Yellow */
+}
+
+.anime::before {
+  background: #6B4E71; /* Anime Purple */
+}
+
+.interest-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.basketball .interest-icon {
+  color: #CE1141; /* Raptors Red */
+}
+
+.pokemon .interest-icon {
+  color: #FFCB05; /* Pokemon Yellow */
+}
+
+.anime .interest-icon {
+  color: #6B4E71; /* Anime Purple */
+}
+
+.interest-card:hover .interest-icon {
+  transform: scale(1.2);
+}
+
+.interest-card h3 {
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.interest-card h3::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  transition: width 0.3s ease;
+}
+
+.interest-card:hover h3::after {
+  width: 100%;
+}
+
+.basketball h3::after {
+  background: #CE1141; /* Raptors Red */
+}
+
+.pokemon h3::after {
+  background: #FFCB05; /* Pokemon Yellow */
+}
+
+.anime h3::after {
+  background: #6B4E71; /* Anime Purple */
+}
+
+.interest-card p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.interest-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.interest-tags span {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.interest-tags span::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.interest-tags span:hover {
+  color: white;
+  transform: translateY(-2px);
+}
+
+.interest-tags span:hover::before {
+  opacity: 0.2;
+}
+
+.basketball .interest-tags span:hover::before {
+  background: #CE1141; /* Raptors Red */
+}
+
+.pokemon .interest-tags span:hover::before {
+  background: #FFCB05; /* Pokemon Yellow */
+}
+
+.anime .interest-tags span:hover::before {
+  background: #6B4E71; /* Anime Purple */
+}
+
+/* Personal photo section */
+.personal-photo {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.photo-frame {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  border: 3px solid var(--bg-primary);
+  flex-shrink: 0;
+}
+
+.photo-frame:hover {
+  transform: scale(1.05);
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.photo-quote {
+  color: var(--text-primary);
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  max-width: 250px;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.photo-quote::before {
+  content: '"';
+  position: absolute;
+  left: 0;
+  top: -0.5rem;
+  font-size: 2rem;
+  color: var(--primary-color);
+  opacity: 0.7;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .beyond-code-header {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .personal-photo {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .photo-quote {
+    padding-left: 0;
+    max-width: 100%;
+  }
+  
+  .photo-quote::before {
+    display: none;
+  }
+  
+  .interests-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .photo-frame {
+    width: 100px;
+    height: 100px;
+  }
+}
