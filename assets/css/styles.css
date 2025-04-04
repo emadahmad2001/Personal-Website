@@ -753,6 +753,7 @@ footer {
 .footer-links {
 	display: flex;
 	gap: 2rem;
+	flex-wrap: wrap;
 }
 
 .footer-links a {
@@ -760,6 +761,7 @@ footer {
 	text-decoration: none;
 	transition: var(--transition);
 	position: relative;
+	font-weight: 500;
 }
 
 .footer-links a::after {
@@ -773,8 +775,26 @@ footer {
 	transition: var(--transition);
 }
 
+.footer-links a:hover {
+	color: var(--primary-color);
+}
+
 .footer-links a:hover::after {
 	width: 100%;
+}
+
+/* Mobile Responsive Styles for Footer */
+@media screen and (max-width: 768px) {
+	.footer-content {
+		flex-direction: column;
+		gap: 1.5rem;
+		text-align: center;
+	}
+
+	.footer-links {
+		justify-content: center;
+		gap: 1.5rem;
+	}
 }
 
 /* Company Logos */
