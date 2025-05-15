@@ -1,0 +1,339 @@
+/* Cyberpunk Theme CSS Overrides */
+
+/* Building Lights */
+.building-light {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: var(--neon-blue);
+    box-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
+    animation: windowFlicker 3s infinite;
+    opacity: 0.8;
+}
+
+@keyframes windowFlicker {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.3; }
+    75% { opacity: 0.5; }
+    85% { opacity: 0.8; }
+    87% { opacity: 0.1; }
+    90% { opacity: 0.8; }
+}
+
+/* Cyberpunk Skyline */
+.cyberpunk-skyline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.8;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0, 212, 255, 0.1) 100%);
+}
+
+.city-layer {
+    position: absolute;
+    bottom: 0;
+    width: 200%;
+    height: 100%;
+    background-repeat: repeat-x;
+    background-position: bottom;
+    animation: cityMove 60s linear infinite;
+}
+
+.city-layer-1 {
+    height: 40%;
+    background: 
+        linear-gradient(to top, var(--skyline-dark) 0%, var(--skyline-dark) 70%, transparent 100%) 0 bottom,
+        linear-gradient(to top, var(--skyline-mid) 0%, var(--skyline-mid) 80%, transparent 100%) 60px bottom,
+        linear-gradient(to top, var(--skyline-dark) 0%, var(--skyline-dark) 75%, transparent 100%) 120px bottom,
+        linear-gradient(to top, var(--skyline-light) 0%, var(--skyline-light) 85%, transparent 100%) 180px bottom,
+        linear-gradient(to top, var(--skyline-dark) 0%, var(--skyline-dark) 78%, transparent 100%) 240px bottom,
+        linear-gradient(to top, var(--skyline-mid) 0%, var(--skyline-mid) 82%, transparent 100%) 300px bottom;
+    background-size: 40px 100%, 50px 100%, 45px 100%, 60px 100%, 35px 100%, 55px 100%;
+    opacity: 0.9;
+}
+
+.city-layer-2 {
+    height: 25%;
+    background: 
+        linear-gradient(to top, var(--skyline-mid) 0%, var(--skyline-mid) 60%, transparent 100%) 30px bottom,
+        linear-gradient(to top, var(--skyline-light) 0%, var(--skyline-light) 70%, transparent 100%) 80px bottom,
+        linear-gradient(to top, var(--skyline-mid) 0%, var(--skyline-mid) 65%, transparent 100%) 130px bottom,
+        linear-gradient(to top, var(--skyline-light) 0%, var(--skyline-light) 75%, transparent 100%) 180px bottom,
+        linear-gradient(to top, var(--skyline-mid) 0%, var(--skyline-mid) 68%, transparent 100%) 230px bottom;
+    background-size: 50px 100%, 45px 100%, 55px 100%, 40px 100%, 48px 100%;
+    animation-delay: -20s;
+    opacity: 0.7;
+}
+
+.city-layer-3 {
+    height: 15%;
+    background: 
+        linear-gradient(to top, var(--skyline-light) 0%, var(--skyline-light) 50%, transparent 100%) 20px bottom,
+        linear-gradient(to top, var(--skyline-light) 0%, var(--skyline-light) 60%, transparent 100%) 70px bottom,
+        linear-gradient(to top, var(--skyline-light) 0%, var(--skyline-light) 55%, transparent 100%) 120px bottom,
+        linear-gradient(to top, var(--skyline-light) 0%, var(--skyline-light) 65%, transparent 100%) 170px bottom;
+    background-size: 60px 100%, 50px 100%, 45px 100%, 55px 100%;
+    animation-delay: -40s;
+    opacity: 0.5;
+}
+
+@keyframes cityMove {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Enhanced hero heading with glitch effect */
+.glitch-reveal {
+    position: relative;
+    color: #ffffff; /* White base color for better visibility */
+    font-family: 'Orbitron', var(--monospace-font);
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color);
+    animation: textPulse 4s ease-in-out infinite;
+    opacity: 1 !important;
+    display: block !important;
+    transform: translateY(0) !important;
+}
+
+.glitch-reveal::before,
+.glitch-reveal::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: -1;
+    opacity: 0.8;
+}
+
+.glitch-reveal::before {
+    color: var(--neon-blue);
+    text-shadow: 0 0 15px var(--neon-blue), 0 0 30px var(--neon-blue);
+    animation: glitch-anim-1 5s infinite;
+    left: -2px;
+}
+
+.glitch-reveal::after {
+    color: var(--neon-pink);
+    text-shadow: 0 0 15px var(--neon-pink), 0 0 30px var(--neon-pink);
+    animation: glitch-anim-2 5s infinite;
+    left: 2px;
+}
+
+@keyframes glitch-anim-1 {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-5px, 3px); }
+    40% { transform: translate(-5px, -3px); }
+    60% { transform: translate(5px, -3px); }
+    80% { transform: translate(5px, 3px); }
+}
+
+@keyframes glitch-anim-2 {
+    0%, 100% { transform: translate(0); }
+    25% { transform: translate(5px, 0); }
+    50% { transform: translate(-5px, 0); }
+    75% { transform: translate(0, 5px); }
+}
+
+@keyframes textPulse {
+    0%, 100% { text-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color); }
+    50% { text-shadow: 0 0 25px var(--primary-color), 0 0 50px var(--primary-color), 0 0 70px var(--primary-color); }
+}
+
+.glitch-reveal.revealed {
+    animation: glitch 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both, textPulse 4s ease-in-out infinite;
+}
+
+@keyframes glitch {
+    0% {
+        transform: translate(0);
+    }
+    20% {
+        transform: translate(-5px, 5px);
+    }
+    40% {
+        transform: translate(-5px, -5px);
+    }
+    60% {
+        transform: translate(5px, 5px);
+    }
+    80% {
+        transform: translate(5px, -5px);
+    }
+    100% {
+        transform: translate(0);
+    }
+}
+
+/* CRT scanlines effect */
+.scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 15;
+    opacity: 0.35;
+}
+
+.scanlines::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(0, 212, 255, 0.15) 51%
+    );
+    background-size: 100% 4px;
+    animation: scanlines-move 2s linear infinite;
+}
+
+/* Add screen flicker effect */
+.scanlines::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 212, 255, 0.03);
+    opacity: 0;
+    animation: screen-flicker 6s ease-in-out infinite;
+}
+
+@keyframes screen-flicker {
+    0%, 95%, 100% { opacity: 0; }
+    96%, 99% { opacity: 0.3; }
+}
+
+@keyframes scanlines-move {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(4px); }
+}
+
+/* Cursor blink animation */
+.cursor {
+    display: inline-block;
+    width: 1px;
+    height: 1em;
+    background-color: var(--primary-color);
+    margin-left: 2px;
+    animation: cursor-blink 1s infinite;
+    box-shadow: 0 0 5px var(--primary-color), 0 0 8px var(--primary-color);
+}
+
+@keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Fixed z-index issues */
+section, .about-content, .skills-grid, .projects-grid, 
+.timeline, .contact-container, .interests-grid {
+    position: relative;
+    z-index: 10;
+}
+
+/* Neon section headings */
+section h2 {
+    text-shadow: 0 0 5px var(--primary-color), 0 0 15px var(--primary-color);
+}
+
+/* Enhanced focus styles for accessibility */
+*:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Data transmission lines */
+.data-lines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0.4;
+}
+
+.data-line {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+    height: 1px;
+    width: 100%;
+    opacity: 0;
+    animation: data-transmission 8s linear infinite;
+}
+
+@keyframes data-transmission {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.7;
+    }
+    90% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Enhanced cyberpunk console with matrix-like effect */
+.cyberpunk-console {
+    position: relative;
+    overflow: hidden;
+}
+
+.cyberpunk-console::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15) 0px,
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+/* Performance optimizations */
+.cyberpunk-rain, .rain-drop, .parallax-layer, .city-layer {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* Media query for reduced animation preferences */
+@media (prefers-reduced-motion: reduce) {
+    .cyberpunk-rain, .rain-drop, .rain-ripple,
+    .city-layer, .building-light,
+    .glitch-reveal, .cursor,
+    .project-card:hover, .skill-list span:hover::before,
+    .btn:hover {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+    }
+} 

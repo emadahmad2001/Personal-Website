@@ -5,11 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Emad Ahmad's Portfolio - Software Developer & AI Engineer">
   <title>Emad Ahmad - Portfolio</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/cyberpunk.css">
 </head>
 <body>
+  <!-- Cyberpunk Rain Effect -->
+  <div class="cyberpunk-rain" id="cyberRain"></div>
+  
+  <!-- Data Transmission Lines -->
+  <div class="data-lines" id="dataLines"></div>
+  
+  <!-- Rain Toggle Button -->
+  <button class="rain-toggle" id="rainToggle" title="Toggle Rain Effect">
+    <i class="fas fa-tint"></i>
+  </button>
+
   <!-- Header -->
   <header>
     <nav>
@@ -31,14 +43,23 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="hero">
-    <div class="floating-elements">
+  <section class="hero parallax-section">
+    <!-- Cyberpunk Skyline -->
+    <div class="cyberpunk-skyline parallax-layer parallax-layer-1">
+      <div class="city-layer city-layer-1"></div>
+      <div class="city-layer city-layer-2"></div>
+      <div class="city-layer city-layer-3"></div>
+      <div class="building-lights"></div>
+    </div>
+    
+    <div class="floating-elements parallax-layer parallax-layer-2">
       <div class="floating-element"></div>
       <div class="floating-element"></div>
       <div class="floating-element"></div>
     </div>
-    <div class="hero-content">
-      <h1 data-text="Hi, I'm Emad Ahmad">Hi, I'm Emad Ahmad</h1>
+    
+    <div class="hero-content parallax-layer parallax-layer-3">
+      <h1 class="glitch-reveal" data-text="Hi, I'm Emad Ahmad">Hi, I'm Emad Ahmad</h1>
       <p>Software Developer & AI Engineer | Building innovative solutions with code and creativity.</p>
       <div class="hero-buttons">
         <a href="#projects" class="btn">View My Work</a>
@@ -49,6 +70,9 @@
         <i class="fas fa-chevron-down"></i>
       </div>
     </div>
+    
+    <!-- CRT Scanlines Overlay -->
+    <div class="scanlines"></div>
   </section>
 
   <!-- About Section -->
@@ -92,7 +116,7 @@
       </div>
     </div>
     <div class="interests-container">
-      <div class="interests-grid">
+      <div class="interests-grid stagger-children">
         <div class="interest-card basketball">
           <div class="interest-icon">
             <i class="fas fa-basketball-ball"></i>
@@ -367,6 +391,11 @@
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
+      </div>
+      
+      <!-- Cyberpunk Console -->
+      <div class="cyberpunk-console">
+        <div class="console-text" id="consoleText">Initializing system... Establishing neural link... Welcome to Emad Ahmad's portfolio v2.5.0...</div>
       </div>
     </div>
   </footer>
