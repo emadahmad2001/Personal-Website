@@ -65,6 +65,26 @@ header, nav, footer, .footer-content, .contact-form {
     box-sizing: border-box !important;
 }
 
+/* Fix About Me section text overflow */
+.about-content, .about-text {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+.about-text p {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    text-align: left !important;
+    padding: 0 !important;
+}
+
 /* Responsive Media Queries */
 @media (max-width: 768px) {
     /* Make hero content more prominent */
@@ -74,6 +94,41 @@ header, nav, footer, .footer-content, .contact-form {
         margin: 80px auto 20px auto !important;
         border: 1px solid rgba(0, 212, 255, 0.4) !important;
         box-shadow: 0 0 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 212, 255, 0.3) !important;
+    }
+    
+    /* Fix About Me section on mobile */
+    .about-content {
+        display: flex !important;
+        flex-direction: column-reverse !important;
+        gap: 2rem !important;
+        padding: 0 15px !important;
+    }
+    
+    .about-text {
+        padding: 0 !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .about-text p {
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .about-stats {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: space-around !important;
+        gap: 10px !important;
+        margin: 0 auto !important;
+        padding: 15px !important;
+        width: 100% !important;
+    }
+    
+    .stat {
+        flex: 1 1 100px !important;
+        min-width: 100px !important;
+        margin: 5px !important;
     }
     
     /* Reduce or hide some decorative elements on mobile */
@@ -179,5 +234,20 @@ header, nav, footer, .footer-content, .contact-form {
     .hero-content {
         padding: 15px 10px !important;
         margin-top: 70px !important;
+    }
+    
+    /* Further fix About section on very small screens */
+    .about-text p {
+        font-size: 0.9rem !important;
+        line-height: 1.5 !important;
+        padding: 0 5px !important;
+    }
+    
+    .stat-number {
+        font-size: 2rem !important;
+    }
+    
+    .stat-label {
+        font-size: 0.8rem !important;
     }
 } 
