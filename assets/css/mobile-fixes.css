@@ -33,8 +33,59 @@ section, .container, .hero-content, .about-content,
     text-align: center;
 }
 
+/* Fix hero section visibility issues on mobile */
+.hero-content {
+    z-index: 100 !important; /* Much higher z-index to override other elements */
+    background: rgba(0, 10, 30, 0.6) !important; /* More visible background */
+    position: relative !important;
+    display: block !important;
+    opacity: 1 !important;
+}
+
+/* Fix floating holographic text on mobile */
+.floating-holo-text {
+    z-index: 5; /* Lower z-index than hero content */
+    opacity: 0.7 !important;
+}
+
+/* Fix layout issues with no side-scrolling */
+header, nav, footer, .footer-content, .contact-form {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+/* Ensure form inputs don't cause overflow */
+.contact-form input, 
+.contact-form textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
 /* Responsive Media Queries */
 @media (max-width: 768px) {
+    /* Make hero content more prominent */
+    .hero-content {
+        max-width: 95% !important;
+        padding: 20px 15px !important;
+        margin: 80px auto 20px auto !important;
+        border: 1px solid rgba(0, 212, 255, 0.4) !important;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 212, 255, 0.3) !important;
+    }
+    
+    /* Reduce or hide some decorative elements on mobile */
+    .city-layer {
+        opacity: 0.4 !important;
+    }
+    
+    .floating-holo-text:nth-child(3),
+    .floating-holo-text:nth-child(4) {
+        display: none !important;
+    }
+    
     /* Reduce particle count for rain effect */
     .rain-drop {
         display: none;
@@ -68,12 +119,6 @@ section, .container, .hero-content, .about-content,
         font-size: 1rem !important;
     }
     
-    /* Reduce padding for content containers */
-    .hero-content {
-        padding: 20px !important;
-        max-width: 95% !important;
-    }
-    
     /* Adjust city layers for better mobile performance */
     .city-layer-1, .city-layer-2, .city-layer-3 {
         background-size: 20px 100%, 25px 100%, 22px 100%, 30px 100%, 18px 100%, 28px 100% !important;
@@ -100,6 +145,13 @@ section, .container, .hero-content, .about-content,
     .contact-form button {
         max-width: 100% !important;
     }
+    
+    /* Fix contact container */
+    .contact-container {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2rem !important;
+    }
 }
 
 /* Extra small devices */
@@ -115,11 +167,17 @@ section, .container, .hero-content, .about-content,
     
     /* Further optimize city skyline */
     .city-layer-1, .city-layer-2, .city-layer-3 {
-        opacity: 0.6 !important;
+        opacity: 0.3 !important;
     }
     
     /* Simplify animations on small devices */
     .cyberpunk-skyline, .scanlines, .data-line {
-        opacity: 0.5 !important;
+        opacity: 0.4 !important;
+    }
+    
+    /* Ensure hero content is fully visible */
+    .hero-content {
+        padding: 15px 10px !important;
+        margin-top: 70px !important;
     }
 } 

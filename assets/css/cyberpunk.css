@@ -283,7 +283,7 @@
     display: block !important;
     transform: translateY(0) !important;
     padding: 10px 20px; /* Added padding around text */
-    background: rgba(0, 10, 30, 0.6); /* Semi-transparent background */
+    background: rgba(0, 10, 30, 0.8); /* More opaque background for better visibility */
     backdrop-filter: blur(5px); /* Blur effect for modern browsers */
     -webkit-backdrop-filter: blur(5px);
     border-radius: 5px;
@@ -684,15 +684,19 @@ section h2 {
         font-size: 0.7rem;
     }
     
-    /* Enhanced mobile hero section */
+    /* Adjust hero content container for mobile */
     .hero-content {
         padding: 20px;
-        max-width: 95%;
+        max-width: 92%;
+        z-index: 100;
+        background: rgba(0, 10, 30, 0.7);
+        border: 1px solid rgba(0, 212, 255, 0.4);
     }
     
     .glitch-reveal {
         font-size: 1.5rem;
         padding: 8px 15px;
+        background: rgba(0, 10, 30, 0.9);
     }
     
     .hero p {
@@ -714,6 +718,26 @@ section h2 {
     .building-window:nth-child(2n) {
         display: none;
     }
+    
+    /* Adjust floating text for mobile */
+    .floating-holo-text {
+        opacity: 0.5;
+        z-index: 5;
+    }
+    
+    /* Reduce distracting elements */
+    .city-layer-1, .city-layer-2, .city-layer-3 {
+        opacity: 0.3;
+    }
+    
+    /* Simplify city skyline on mobile */
+    .city-layer-1, .city-layer-2, .city-layer-3 {
+        background-size: 20px 100%, 25px 100%, 22px 100%, 30px 100%, 18px 100%, 28px 100%;
+    }
+    
+    .city-layer-1::before, .city-layer-2::before, .city-layer-3::before {
+        background-size: 20px 100%, 25px 100%, 22px 100%, 30px 100%, 18px 100%, 28px 100%;
+    }
 }
 
 /* Extra small devices */
@@ -733,6 +757,17 @@ section h2 {
     .floating-holo-text:nth-child(4) {
         display: none;
     }
+    
+    /* Ensure site content has priority */
+    .hero-content {
+        z-index: 100;
+        max-width: 95%;
+    }
+    
+    /* Reduce skyline opacity */
+    .cyberpunk-skyline {
+        opacity: 0.7;
+    }
 }
 
 /* Add high resolution/retina display optimizations */
@@ -749,13 +784,13 @@ section h2 {
 /* Hero content container */
 .hero-content {
     position: relative;
-    z-index: 5; /* Ensure it's above the skyline */
-    background: rgba(0, 10, 30, 0.4); /* Semi-transparent background */
+    z-index: 15; /* Higher z-index to ensure it's above decorative elements */
+    background: rgba(0, 10, 30, 0.6); /* Semi-transparent background */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 30px;
     border-radius: 10px;
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    border: 1px solid rgba(0, 212, 255, 0.4);
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
     max-width: 85%;
     margin: 0 auto;
