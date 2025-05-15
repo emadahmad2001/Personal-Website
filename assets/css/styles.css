@@ -48,6 +48,12 @@
 	box-sizing: border-box;
 }
 
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
+}
+
 body {
 	font-family: 'Rajdhani', 'Courier New', monospace;
 	line-height: 1.6;
@@ -111,6 +117,7 @@ nav {
 	margin: 0 auto;
 	background: transparent;
 	border-bottom: none;
+    width: 100%;
 }
 
 .logo {
@@ -3398,4 +3405,94 @@ footer {
 		margin-left: auto;
 		margin-right: auto;
 	}
+}
+
+/* Container styles to prevent overflow */
+.container, section {
+	padding: 4rem 2rem;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+/* Enhanced Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+    .container, section {
+        padding: 2rem 1rem;
+    }
+    
+    /* Fix grid layouts on mobile */
+    .skills-grid, .projects-grid, .interests-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+    }
+    
+    /* Fix about section on mobile */
+    .about-content {
+        flex-direction: column-reverse;
+    }
+    
+    .about-stats {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    /* Fix contact section on mobile */
+    .contact-container {
+        flex-direction: column;
+    }
+    
+    .contact-form, .contact-info {
+        width: 100%;
+        margin: 1rem 0;
+    }
+    
+    /* Fix footer on mobile */
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+    
+    /* Fix all flex containers to wrap on mobile */
+    .hero-buttons, .project-tech, .social-links, .interest-tags {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* Extra small devices */
+@media screen and (max-width: 480px) {
+    /* Further reduce padding */
+    .container, section {
+        padding: 1.5rem 0.75rem;
+    }
+    
+    /* Adjust font sizes for very small screens */
+    .hero h1 {
+        font-size: 2rem !important;
+    }
+    
+    h2 {
+        font-size: 1.75rem !important;
+    }
+    
+    h3 {
+        font-size: 1.25rem !important;
+    }
+    
+    p, li {
+        font-size: 0.95rem !important;
+    }
+    
+    /* Simplify animations for better performance */
+    .parallax-layer, .floating-elements, .particle {
+        display: none;
+    }
 }

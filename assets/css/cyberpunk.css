@@ -289,6 +289,7 @@
     border-radius: 5px;
     border: 1px solid rgba(0, 212, 255, 0.3);
     margin-bottom: 15px;
+    z-index: 10; /* Ensure it's above other elements */
 }
 
 .glitch-reveal::before,
@@ -708,6 +709,30 @@ section h2 {
         font-size: 0.8rem;
         animation-duration: 12s; /* Slow down scrolling on mobile */
     }
+    
+    /* Reduce particle count for better performance */
+    .building-window:nth-child(2n) {
+        display: none;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    /* Further reduce effects for very small screens */
+    .glitch-reveal {
+        font-size: 1.3rem;
+        padding: 6px 12px;
+    }
+    
+    .hero p {
+        font-size: 0.8rem;
+    }
+    
+    /* Reduce animation complexity */
+    .floating-holo-text:nth-child(3),
+    .floating-holo-text:nth-child(4) {
+        display: none;
+    }
 }
 
 /* Add high resolution/retina display optimizations */
@@ -734,6 +759,8 @@ section h2 {
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
     max-width: 85%;
     margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .hero p {
@@ -741,4 +768,7 @@ section h2 {
     text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
+    text-align: center; /* Center the subtitle text */
+    width: 100%;
+    padding: 0 10px;
 } 

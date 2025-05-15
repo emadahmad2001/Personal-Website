@@ -20,6 +20,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // Validate skyline visibility and add fallback if needed
     validateSkylineVisibility();
     
+    // Handle window resize to adjust effects for different screen sizes
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        // Debounce resize event
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            // Only recreate effects if width changes significantly (orientation change)
+            const cyberRain = document.getElementById('cyberRain');
+            const buildingLights = document.querySelector('.building-lights');
+            
+            if (cyberRain) {
+                cyberRain.innerHTML = '';
+                createCyberpunkRain();
+            }
+            
+            if (buildingLights) {
+                buildingLights.innerHTML = '';
+                createBuildingWindows();
+            }
+        }, 500);
+    });
+    
     // Ensure loading screen is removed if load event doesn't fire
     setTimeout(() => {
         if (document.querySelector('.loading')) {
@@ -203,8 +225,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const rainContainer = document.getElementById('cyberRain');
         if (!rainContainer) return;
 
-        // Create rain drops
-        const rainCount = Math.floor(window.innerWidth / 15); // Responsive rain density
+        // Create rain drops - with responsive density based on screen width
+        const isMobile = window.innerWidth <= 768;
+        const rainCount = isMobile ? 
+            Math.floor(window.innerWidth / 40) : // Fewer drops on mobile
+            Math.floor(window.innerWidth / 15);  // More drops on desktop
         
         for (let i = 0; i < rainCount; i++) {
             const drop = document.createElement('div');
@@ -371,7 +396,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Create building lights
         const buildingLights = document.querySelector('.building-lights');
         if (buildingLights) {
-            const lightCount = 100;
+            // Adjust light count based on device
+            const isMobile = window.innerWidth <= 768;
+            const lightCount = isMobile ? 40 : 100; // Fewer lights on mobile
             
             for (let i = 0; i < lightCount; i++) {
                 const light = document.createElement('div');
@@ -637,7 +664,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const buildingLights = document.querySelector('.building-lights');
         if (!buildingLights) return;
         
-        const windowCount = 200; // Number of windows
+        // Adjust window count based on device
+        const isMobile = window.innerWidth <= 768;
+        const windowCount = isMobile ? 80 : 200; // Reduced count on mobile
         
         for (let i = 0; i < windowCount; i++) {
             const window = document.createElement('div');

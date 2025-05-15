@@ -1,0 +1,125 @@
+/* Mobile Responsiveness Fixes */
+
+/* Prevent horizontal scrolling */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
+/* Fix container widths */
+section, .container, .hero-content, .about-content, 
+.skills-grid, .projects-grid, .timeline, 
+.contact-container, .interests-grid {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Fix heading on hero section */
+.glitch-reveal {
+    display: block !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    z-index: 10;
+    position: relative;
+}
+
+/* Center hero subtitle on mobile */
+.hero p {
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+    /* Reduce particle count for rain effect */
+    .rain-drop {
+        display: none;
+    }
+    
+    .rain-drop:nth-child(3n) {
+        display: block; /* Show only every 3rd rain drop on mobile */
+    }
+    
+    /* Scale down grid layouts to single column */
+    .skills-grid, .projects-grid, .interests-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+    }
+    
+    /* Adjust section padding */
+    section {
+        padding: 2rem 1rem;
+    }
+    
+    /* Reduce font sizes */
+    .hero h1, .glitch-reveal {
+        font-size: 2.5rem !important;
+    }
+    
+    section h2 {
+        font-size: 2rem !important;
+    }
+    
+    .hero p {
+        font-size: 1rem !important;
+    }
+    
+    /* Reduce padding for content containers */
+    .hero-content {
+        padding: 20px !important;
+        max-width: 95% !important;
+    }
+    
+    /* Adjust city layers for better mobile performance */
+    .city-layer-1, .city-layer-2, .city-layer-3 {
+        background-size: 20px 100%, 25px 100%, 22px 100%, 30px 100%, 18px 100%, 28px 100% !important;
+    }
+    
+    /* Add flex-wrap to all flex containers */
+    .hero-buttons, .about-stats, .contact-container, .footer-content, .project-tech {
+        flex-wrap: wrap !important;
+    }
+    
+    /* Adjust timeline for mobile */
+    .timeline-item {
+        padding-left: 1.5rem !important;
+    }
+    
+    /* Fix company logo sizes */
+    .company-logo {
+        max-width: 100px !important;
+    }
+    
+    /* Ensure form inputs don't overflow */
+    .contact-form input, 
+    .contact-form textarea,
+    .contact-form button {
+        max-width: 100% !important;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    /* Further reduce font sizes */
+    .hero h1, .glitch-reveal {
+        font-size: 2rem !important;
+    }
+    
+    section h2 {
+        font-size: 1.75rem !important;
+    }
+    
+    /* Further optimize city skyline */
+    .city-layer-1, .city-layer-2, .city-layer-3 {
+        opacity: 0.6 !important;
+    }
+    
+    /* Simplify animations on small devices */
+    .cyberpunk-skyline, .scanlines, .data-line {
+        opacity: 0.5 !important;
+    }
+} 
