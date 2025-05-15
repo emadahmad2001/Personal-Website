@@ -16,7 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize cyberpunk effects
     initializeCyberpunkEffects();
-
+    
+    // Validate skyline visibility and add fallback if needed
+    validateSkylineVisibility();
+    
     // Ensure loading screen is removed if load event doesn't fire
     setTimeout(() => {
         if (document.querySelector('.loading')) {
@@ -158,13 +161,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function initializeCyberpunkEffects() {
         createCyberpunkRain();
         createDataTransmissionLines();
+        createBuildingWindows();
         initCyberpunkScrollAnimations();
         createCyberpunkSkyline();
         initSkylineParallax();
         initRainToggle();
         initConsoleLog();
         addTypingEffect();
+        initKonamiCode();
         ensureContentVisibility();
+        debounceAnimations();
     }
 
     // Create data transmission lines effect
@@ -624,5 +630,317 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.position = 'relative';
             card.style.zIndex = '5';
         });
+    }
+
+    // Create building windows with random patterns
+    function createBuildingWindows() {
+        const buildingLights = document.querySelector('.building-lights');
+        if (!buildingLights) return;
+        
+        const windowCount = 200; // Number of windows
+        
+        for (let i = 0; i < windowCount; i++) {
+            const window = document.createElement('div');
+            window.className = 'building-window';
+            
+            // Randomize positioning
+            const leftPos = Math.floor(Math.random() * 100);
+            const bottomPos = Math.floor(Math.random() * 60);
+            const size = Math.random() * 2 + 1; // 1-3px
+            const delay = Math.random() * 5; // 0-5s delay for flicker
+            
+            window.style.left = `${leftPos}%`;
+            window.style.bottom = `${bottomPos}%`;
+            window.style.width = `${size}px`;
+            window.style.height = `${size}px`;
+            window.style.animationDelay = `${delay}s`;
+            
+            buildingLights.appendChild(window);
+        }
+    }
+
+    // Konami Code Easter Egg
+    function initKonamiCode() {
+        const konamiPattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+        
+        document.addEventListener('keydown', (e) => {
+            // Check if the pressed key matches the expected key in the pattern
+            if (e.key === konamiPattern[konamiIndex] || 
+                (e.key.toLowerCase() === konamiPattern[konamiIndex].toLowerCase())) {
+                konamiIndex++;
+                
+                // If the entire pattern is matched
+                if (konamiIndex === konamiPattern.length) {
+                    triggerMatrixRain();
+                    konamiIndex = 0; // Reset for next time
+                }
+            } else {
+                konamiIndex = 0; // Reset on mismatch
+            }
+        });
+    }
+
+    // Matrix Rain Effect
+    function triggerMatrixRain() {
+        const matrixRain = document.getElementById('matrixRain');
+        if (!matrixRain) return;
+        
+        // Clear any existing drops
+        matrixRain.innerHTML = '';
+        
+        // Create matrix drops
+        const columns = Math.floor(window.innerWidth / 20); // One drop every ~20px
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$&+,:;=?@#'.split('');
+        
+        for (let i = 0; i < columns; i++) {
+            const drop = document.createElement('div');
+            drop.className = 'matrix-drop';
+            drop.style.left = `${i * 20 + Math.random() * 10}px`;
+            drop.style.animationDuration = `${Math.random() * 2 + 2}s`; // 2-4s
+            drop.style.animationDelay = `${Math.random() * 2}s`;
+            
+            // Create random characters
+            const charCount = Math.floor(Math.random() * 10) + 5; // 5-15 chars
+            let text = '';
+            for (let j = 0; j < charCount; j++) {
+                text += chars[Math.floor(Math.random() * chars.length)];
+            }
+            drop.textContent = text;
+            
+            matrixRain.appendChild(drop);
+        }
+        
+        // Show matrix rain
+        matrixRain.classList.add('active');
+        
+        // Hide matrix rain after 10 seconds
+        setTimeout(() => {
+            matrixRain.classList.remove('active');
+        }, 10000);
+    }
+
+    // Optimize performance by debouncing animations on scroll
+    function debounceAnimations() {
+        let scrollTimeout;
+        const skylineElements = document.querySelectorAll('.city-layer, .building-window');
+        
+        window.addEventListener('scroll', () => {
+            // Reduce animation complexity during scroll
+            skylineElements.forEach(el => {
+                el.style.animationPlayState = 'paused';
+            });
+            
+            // Resume animations after scrolling stops
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                skylineElements.forEach(el => {
+                    el.style.animationPlayState = 'running';
+                });
+            }, 200);
+        });
+    }
+
+    // Add skyline visibility validation
+    function validateSkylineVisibility() {
+        // Wait a bit to ensure all CSS has loaded and applied
+        setTimeout(() => {
+            const skyline = document.querySelector('.cyberpunk-skyline');
+            if (!skyline) return;
+            
+            // Check if the skyline is properly visible
+            const skylineComputed = window.getComputedStyle(skyline);
+            const cityLayers = document.querySelectorAll('.city-layer');
+            
+            // Check if skyline has issues (invisible or not rendered)
+            if (skylineComputed.opacity < 0.1 || cityLayers.length === 0 || cityLayers[0].offsetHeight < 10) {
+                console.log("Skyline CSS failed — loading fallback");
+                
+                // Add a fallback skyline using SVG
+                const fallbackSkyline = document.createElement('div');
+                fallbackSkyline.className = 'fallback-skyline';
+                fallbackSkyline.innerHTML = `
+                    <svg width="100%" height="100%" viewBox="0 0 1200 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="rgba(0,10,30,0)" />
+                                <stop offset="100%" stop-color="rgba(0,10,30,0.8)" />
+                            </linearGradient>
+                            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="8" result="blur" />
+                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                            </filter>
+                        </defs>
+                        <rect x="0" y="0" width="100%" height="100%" fill="url(#skyGradient)" />
+                        <!-- Buildings background layer -->
+                        <g fill="#0a0a1a" filter="url(#glow)">
+                            <rect x="0" y="280" width="50" height="120" />
+                            <rect x="60" y="250" width="40" height="150" />
+                            <rect x="110" y="290" width="70" height="110" />
+                            <rect x="190" y="240" width="30" height="160" />
+                            <rect x="230" y="260" width="80" height="140" />
+                            <rect x="320" y="230" width="60" height="170" />
+                            <rect x="390" y="280" width="40" height="120" />
+                            <rect x="440" y="250" width="70" height="150" />
+                            <rect x="520" y="220" width="50" height="180" />
+                            <rect x="580" y="270" width="30" height="130" />
+                            <rect x="620" y="240" width="60" height="160" />
+                            <rect x="690" y="260" width="40" height="140" />
+                            <rect x="740" y="230" width="50" height="170" />
+                            <rect x="800" y="270" width="70" height="130" />
+                            <rect x="880" y="240" width="40" height="160" />
+                            <rect x="930" y="220" width="30" height="180" />
+                            <rect x="970" y="280" width="60" height="120" />
+                            <rect x="1040" y="250" width="50" height="150" />
+                            <rect x="1100" y="230" width="70" height="170" />
+                            <rect x="1180" y="260" width="40" height="140" />
+                        </g>
+                        <!-- Neon outlines -->
+                        <g fill="none" stroke="#00d4ff" stroke-width="1" opacity="0.7">
+                            <rect x="0" y="280" width="50" height="120" />
+                            <rect x="110" y="290" width="70" height="110" stroke="#ff00aa" />
+                            <rect x="230" y="260" width="80" height="140" />
+                            <rect x="390" y="280" width="40" height="120" stroke="#ff00aa" />
+                            <rect x="520" y="220" width="50" height="180" />
+                            <rect x="620" y="240" width="60" height="160" stroke="#8b5cf6" />
+                            <rect x="800" y="270" width="70" height="130" />
+                            <rect x="930" y="220" width="30" height="180" stroke="#ff00aa" />
+                            <rect x="1100" y="230" width="70" height="170" />
+                        </g>
+                        <!-- Building windows -->
+                        <g fill="#00d4ff" opacity="0.8">
+                            <circle cx="25" cy="300" r="1" />
+                            <circle cx="25" cy="320" r="1" />
+                            <circle cx="25" cy="340" r="1" />
+                            <circle cx="40" cy="310" r="1" />
+                            <circle cx="40" cy="330" r="1" />
+                            <circle cx="40" cy="350" r="1" />
+                            
+                            <circle cx="80" cy="270" r="1" fill="#ff00aa" />
+                            <circle cx="80" cy="290" r="1" fill="#ff00aa" />
+                            <circle cx="80" cy="310" r="1" fill="#ff00aa" />
+                            <circle cx="80" cy="330" r="1" fill="#ff00aa" />
+                            
+                            <!-- More windows throughout buildings -->
+                            <circle cx="140" cy="320" r="1" />
+                            <circle cx="140" cy="340" r="1" />
+                            <circle cx="160" cy="310" r="1" />
+                            <circle cx="160" cy="330" r="1" />
+                            <circle cx="160" cy="350" r="1" />
+                            
+                            <circle cx="250" cy="280" r="1" fill="#8b5cf6" />
+                            <circle cx="250" cy="300" r="1" fill="#8b5cf6" />
+                            <circle cx="250" cy="320" r="1" fill="#8b5cf6" />
+                            <circle cx="270" cy="290" r="1" fill="#8b5cf6" />
+                            <circle cx="270" cy="310" r="1" fill="#8b5cf6" />
+                            <circle cx="270" cy="330" r="1" fill="#8b5cf6" />
+                            
+                            <circle cx="350" cy="250" r="1" />
+                            <circle cx="350" cy="270" r="1" />
+                            <circle cx="350" cy="290" r="1" />
+                            <circle cx="350" cy="310" r="1" />
+                            <circle cx="350" cy="330" r="1" />
+                            <circle cx="350" cy="350" r="1" />
+                            
+                            <circle cx="410" cy="300" r="1" fill="#ff00aa" />
+                            <circle cx="410" cy="320" r="1" fill="#ff00aa" />
+                            <circle cx="410" cy="340" r="1" fill="#ff00aa" />
+                            
+                            <!-- Additional windows on the right side of skyline -->
+                            <circle cx="550" cy="240" r="1" />
+                            <circle cx="550" cy="260" r="1" />
+                            <circle cx="550" cy="280" r="1" />
+                            <circle cx="550" cy="300" r="1" />
+                            <circle cx="550" cy="320" r="1" />
+                            <circle cx="550" cy="340" r="1" />
+                            
+                            <circle cx="640" cy="260" r="1" fill="#8b5cf6" />
+                            <circle cx="640" cy="280" r="1" fill="#8b5cf6" />
+                            <circle cx="640" cy="300" r="1" fill="#8b5cf6" />
+                            <circle cx="640" cy="320" r="1" fill="#8b5cf6" />
+                            <circle cx="660" cy="250" r="1" fill="#8b5cf6" />
+                            <circle cx="660" cy="270" r="1" fill="#8b5cf6" />
+                            <circle cx="660" cy="290" r="1" fill="#8b5cf6" />
+                            <circle cx="660" cy="310" r="1" fill="#8b5cf6" />
+                            
+                            <circle cx="760" cy="250" r="1" />
+                            <circle cx="760" cy="270" r="1" />
+                            <circle cx="760" cy="290" r="1" />
+                            <circle cx="760" cy="310" r="1" />
+                            <circle cx="780" cy="260" r="1" />
+                            <circle cx="780" cy="280" r="1" />
+                            <circle cx="780" cy="300" r="1" />
+                            
+                            <circle cx="830" cy="290" r="1" fill="#ff00aa" />
+                            <circle cx="830" cy="310" r="1" fill="#ff00aa" />
+                            <circle cx="830" cy="330" r="1" fill="#ff00aa" />
+                            <circle cx="850" cy="280" r="1" fill="#ff00aa" />
+                            <circle cx="850" cy="300" r="1" fill="#ff00aa" />
+                            <circle cx="850" cy="320" r="1" fill="#ff00aa" />
+                            
+                            <circle cx="950" cy="240" r="1" />
+                            <circle cx="950" cy="260" r="1" />
+                            <circle cx="950" cy="280" r="1" />
+                            <circle cx="950" cy="300" r="1" />
+                            <circle cx="950" cy="320" r="1" />
+                            <circle cx="950" cy="340" r="1" />
+                            
+                            <circle cx="1000" cy="300" r="1" fill="#8b5cf6" />
+                            <circle cx="1000" cy="320" r="1" fill="#8b5cf6" />
+                            <circle cx="1000" cy="340" r="1" fill="#8b5cf6" />
+                            <circle cx="1020" cy="290" r="1" fill="#8b5cf6" />
+                            <circle cx="1020" cy="310" r="1" fill="#8b5cf6" />
+                            <circle cx="1020" cy="330" r="1" fill="#8b5cf6" />
+                            
+                            <circle cx="1130" cy="250" r="1" />
+                            <circle cx="1130" cy="270" r="1" />
+                            <circle cx="1130" cy="290" r="1" />
+                            <circle cx="1130" cy="310" r="1" />
+                            <circle cx="1130" cy="330" r="1" />
+                            <circle cx="1150" cy="260" r="1" />
+                            <circle cx="1150" cy="280" r="1" />
+                            <circle cx="1150" cy="300" r="1" />
+                            <circle cx="1150" cy="320" r="1" />
+                        </g>
+                    </svg>
+                `;
+                
+                // Add custom CSS for the fallback
+                const style = document.createElement('style');
+                style.textContent = `
+                    .fallback-skyline {
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        z-index: 1;
+                        pointer-events: none;
+                    }
+                    
+                    @keyframes window-flash {
+                        0%, 100% { opacity: 0.8; }
+                        50% { opacity: 0.3; }
+                    }
+                    
+                    .fallback-skyline circle {
+                        animation: window-flash 3s infinite;
+                    }
+                    
+                    .fallback-skyline circle:nth-child(odd) {
+                        animation-delay: 0.5s;
+                    }
+                    
+                    .fallback-skyline circle:nth-child(3n) {
+                        animation-delay: 1s;
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // Replace the existing skyline
+                skyline.innerHTML = '';
+                skyline.appendChild(fallbackSkyline);
+            }
+        }, 1000); // Check after 1 second to give time for CSS to apply
     }
 });

@@ -1,6 +1,6 @@
 /* Cyberpunk Theme CSS Overrides */
 
-/* Building Lights */
+/* Enhanced Building Lights */
 .building-light {
     position: absolute;
     width: 2px;
@@ -21,7 +21,7 @@
     90% { opacity: 0.8; }
 }
 
-/* Cyberpunk Skyline */
+/* Enhanced Cyberpunk Skyline */
 .cyberpunk-skyline {
     position: absolute;
     bottom: 0;
@@ -30,10 +30,36 @@
     height: 100%;
     z-index: 1;
     pointer-events: none;
-    opacity: 0.8;
-    background: linear-gradient(to bottom, transparent 50%, rgba(0, 212, 255, 0.1) 100%);
+    opacity: 1;
+    background: linear-gradient(to bottom, transparent 40%, rgba(0, 10, 30, 0.6) 100%);
+    will-change: transform;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
 }
 
+/* Digital grid overlay */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(90deg, rgba(0, 40, 70, 0.1) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(0, 40, 70, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.5;
+    animation: gridPulse 8s ease-in-out infinite;
+}
+
+@keyframes gridPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.2; }
+}
+
+/* Enhanced city layers with neon accents */
 .city-layer {
     position: absolute;
     bottom: 0;
@@ -42,8 +68,11 @@
     background-repeat: repeat-x;
     background-position: bottom;
     animation: cityMove 60s linear infinite;
+    will-change: transform;
+    image-rendering: pixelated;
 }
 
+/* Back layer - tallest buildings */
 .city-layer-1 {
     height: 40%;
     background: 
@@ -54,9 +83,31 @@
         linear-gradient(to top, var(--skyline-dark) 0%, var(--skyline-dark) 78%, transparent 100%) 240px bottom,
         linear-gradient(to top, var(--skyline-mid) 0%, var(--skyline-mid) 82%, transparent 100%) 300px bottom;
     background-size: 40px 100%, 50px 100%, 45px 100%, 60px 100%, 35px 100%, 55px 100%;
-    opacity: 0.9;
+    opacity: 1;
 }
 
+/* Add neon outlines to buildings */
+.city-layer-1::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(to top, transparent 70%, var(--neon-blue) 70.5%, transparent 71%) 0 bottom,
+        linear-gradient(to top, transparent 80%, var(--neon-pink) 80.5%, transparent 81%) 60px bottom,
+        linear-gradient(to top, transparent 75%, var(--neon-blue) 75.5%, transparent 76%) 120px bottom,
+        linear-gradient(to top, transparent 85%, var(--neon-purple) 85.5%, transparent 86%) 180px bottom,
+        linear-gradient(to top, transparent 78%, var(--neon-blue) 78.5%, transparent 79%) 240px bottom,
+        linear-gradient(to top, transparent 82%, var(--neon-pink) 82.5%, transparent 83%) 300px bottom;
+    background-size: 40px 100%, 50px 100%, 45px 100%, 60px 100%, 35px 100%, 55px 100%;
+    opacity: 0.9;
+    animation: neonPulse 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 5px var(--neon-blue));
+}
+
+/* Mid layer - medium height buildings */
 .city-layer-2 {
     height: 25%;
     background: 
@@ -70,6 +121,26 @@
     opacity: 0.7;
 }
 
+/* Add neon outlines to mid buildings */
+.city-layer-2::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(to top, transparent 60%, var(--neon-blue) 60.5%, transparent 61%) 30px bottom,
+        linear-gradient(to top, transparent 70%, var(--neon-pink) 70.5%, transparent 71%) 80px bottom,
+        linear-gradient(to top, transparent 65%, var(--neon-purple) 65.5%, transparent 66%) 130px bottom,
+        linear-gradient(to top, transparent 75%, var(--neon-blue) 75.5%, transparent 76%) 180px bottom,
+        linear-gradient(to top, transparent 68%, var(--neon-pink) 68.5%, transparent 69%) 230px bottom;
+    background-size: 50px 100%, 45px 100%, 55px 100%, 40px 100%, 48px 100%;
+    opacity: 0.6;
+    animation: neonPulse 4s ease-in-out infinite 1s;
+}
+
+/* Front layer - shortest buildings */
 .city-layer-3 {
     height: 15%;
     background: 
@@ -82,9 +153,122 @@
     opacity: 0.5;
 }
 
+/* Add neon outlines to front buildings */
+.city-layer-3::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(to top, transparent 50%, var(--neon-purple) 50.5%, transparent 51%) 20px bottom,
+        linear-gradient(to top, transparent 60%, var(--neon-blue) 60.5%, transparent 61%) 70px bottom,
+        linear-gradient(to top, transparent 55%, var(--neon-pink) 55.5%, transparent 56%) 120px bottom,
+        linear-gradient(to top, transparent 65%, var(--neon-blue) 65.5%, transparent 66%) 170px bottom;
+    background-size: 60px 100%, 50px 100%, 45px 100%, 55px 100%;
+    opacity: 0.5;
+    animation: neonPulse 4s ease-in-out infinite 2s;
+}
+
+@keyframes neonPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+}
+
 @keyframes cityMove {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
+}
+
+/* Enhanced building lights with window patterns */
+.building-lights {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    opacity: 0.6;
+    mix-blend-mode: screen;
+    pointer-events: none;
+}
+
+/* Add building windows with random patterns */
+.building-window {
+    position: absolute;
+    background: var(--neon-blue);
+    width: 2px;
+    height: 2px;
+    border-radius: 1px;
+    opacity: 0.8;
+    box-shadow: 0 0 4px var(--neon-blue);
+    animation: windowFlicker 3s infinite;
+}
+
+.building-window:nth-child(3n+1) {
+    background: var(--neon-pink);
+    box-shadow: 0 0 4px var(--neon-pink);
+    animation-delay: 0.5s;
+}
+
+.building-window:nth-child(3n+2) {
+    background: var(--neon-purple);
+    box-shadow: 0 0 4px var(--neon-purple);
+    animation-delay: 1s;
+}
+
+/* Floating holographic text elements */
+.floating-holo-text {
+    position: absolute;
+    color: var(--neon-blue);
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0;
+    pointer-events: none;
+    text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
+    animation: holoTextFade 8s ease-in-out infinite;
+    z-index: 3;
+}
+
+.floating-holo-text:nth-child(1) {
+    top: 35%;
+    left: 70%;
+    animation-delay: 0s;
+}
+
+.floating-holo-text:nth-child(2) {
+    top: 60%;
+    left: 25%;
+    animation-delay: 2s;
+    color: var(--neon-pink);
+    text-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink);
+}
+
+.floating-holo-text:nth-child(3) {
+    top: 25%;
+    left: 15%;
+    animation-delay: 4s;
+    color: var(--neon-purple);
+    text-shadow: 0 0 5px var(--neon-purple), 0 0 10px var(--neon-purple);
+}
+
+.floating-holo-text:nth-child(4) {
+    top: 45%;
+    left: 85%;
+    animation-delay: 6s;
+}
+
+@keyframes holoTextFade {
+    0%, 100% { opacity: 0; transform: translateY(0) scale(1); }
+    5% { opacity: 0; }
+    15%, 30% { opacity: 0.7; }
+    50% { transform: translateY(-20px) scale(1.1); }
+    85%, 95% { opacity: 0.7; }
+    100% { opacity: 0; transform: translateY(-40px) scale(1); }
 }
 
 /* Enhanced hero heading with glitch effect */
@@ -98,6 +282,13 @@
     opacity: 1 !important;
     display: block !important;
     transform: translateY(0) !important;
+    padding: 10px 20px; /* Added padding around text */
+    background: rgba(0, 10, 30, 0.6); /* Semi-transparent background */
+    backdrop-filter: blur(5px); /* Blur effect for modern browsers */
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 5px;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    margin-bottom: 15px;
 }
 
 .glitch-reveal::before,
@@ -151,27 +342,6 @@
     animation: glitch 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both, textPulse 4s ease-in-out infinite;
 }
 
-@keyframes glitch {
-    0% {
-        transform: translate(0);
-    }
-    20% {
-        transform: translate(-5px, 5px);
-    }
-    40% {
-        transform: translate(-5px, -5px);
-    }
-    60% {
-        transform: translate(5px, 5px);
-    }
-    80% {
-        transform: translate(5px, -5px);
-    }
-    100% {
-        transform: translate(0);
-    }
-}
-
 /* CRT scanlines effect */
 .scanlines {
     position: absolute;
@@ -220,6 +390,70 @@
 @keyframes scanlines-move {
     0% { transform: translateY(0); }
     100% { transform: translateY(4px); }
+}
+
+/* Neon borders for cards and buttons */
+.skill-category, .project-card, .timeline-item, .interest-card, .contact-form, .contact-info {
+    position: relative;
+    border: none !important;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+.skill-category::before, .project-card::before, .timeline-item::before, 
+.interest-card::before, .contact-form::before, .contact-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid transparent;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-pink), var(--neon-blue)) border-box;
+    mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    background-size: 300% 300%;
+    animation: borderGradientMove 8s ease infinite;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes borderGradientMove {
+    0%, 100% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+}
+
+/* Low-poly wireframe effect on hover */
+.project-card:hover::after, .skill-category:hover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, 
+                var(--neon-blue) 0, var(--neon-blue) 1px, 
+                transparent 1px, transparent 10px),
+                linear-gradient(135deg, 
+                var(--neon-purple) 0, var(--neon-purple) 1px, 
+                transparent 1px, transparent 10px);
+    background-size: 20px 20px;
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: 1;
+    animation: wireframeAnimate 2s ease-in-out infinite;
+    border-radius: inherit;
+    clip-path: polygon(
+        0% 0%, 
+        100% 0%, 
+        100% 75%, 
+        75% 100%, 
+        0% 100%
+    );
+}
+
+@keyframes wireframeAnimate {
+    0%, 100% { opacity: 0.1; }
+    50% { opacity: 0.2; }
 }
 
 /* Cursor blink animation */
@@ -298,6 +532,23 @@ section h2 {
 .cyberpunk-console {
     position: relative;
     overflow: hidden;
+    margin-top: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--primary-color);
+    padding: 15px;
+    font-family: var(--monospace-font);
+    border-radius: 5px;
+    max-height: 150px; /* Set maximum height */
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3); /* Added glow */
+}
+
+.cyberpunk-console::before {
+    content: ">> SYSTEM LOG:";
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    text-shadow: 0 0 5px var(--primary-color);
 }
 
 .cyberpunk-console::after {
@@ -319,6 +570,39 @@ section h2 {
     opacity: 0.5;
 }
 
+.console-text {
+    color: #00ff00;
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent wrapping */
+    display: inline-block;
+    padding-right: 20px; /* Add padding to prevent text being cut off */
+    animation: consoleScroll 15s linear infinite; /* Added scrolling animation */
+}
+
+@keyframes consoleScroll {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Add a cyberpunk scrollbar for the console */
+.cyberpunk-console::-webkit-scrollbar {
+    height: 5px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.cyberpunk-console::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+    border-radius: 5px;
+}
+
 /* Performance optimizations */
 .cyberpunk-rain, .rain-drop, .parallax-layer, .city-layer {
     will-change: transform;
@@ -331,9 +615,130 @@ section h2 {
     .city-layer, .building-light,
     .glitch-reveal, .cursor,
     .project-card:hover, .skill-list span:hover::before,
-    .btn:hover {
+    .btn:hover, .floating-holo-text, .data-line,
+    .building-window, .hero::before {
         animation: none !important;
         transition: none !important;
         transform: none !important;
     }
+    
+    .hero::before, .scanlines, .city-layer::before {
+        opacity: 0.1 !important;
+    }
+}
+
+/* Matrix Rain Effect (for Konami Code Easter Egg) */
+.matrix-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+    pointer-events: none;
+}
+
+.matrix-rain.active {
+    display: block;
+}
+
+.matrix-drop {
+    position: absolute;
+    color: #00ff00;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1.5rem;
+    line-height: 1;
+    text-shadow: 0 0 5px #00ff00;
+    animation: matrixRain linear infinite;
+}
+
+@keyframes matrixRain {
+    0% {
+        transform: translateY(-100%);
+        opacity: 1;
+    }
+    85% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(calc(100vh + 20px));
+        opacity: 0;
+    }
+}
+
+/* Add responsive styles for mobile devices */
+@media (max-width: 768px) {
+    .city-layer-1, .city-layer-2, .city-layer-3 {
+        background-size: 20px 100%, 25px 100%, 22px 100%, 30px 100%, 18px 100%, 28px 100%;
+    }
+    
+    .city-layer-1::before, .city-layer-2::before, .city-layer-3::before {
+        background-size: 20px 100%, 25px 100%, 22px 100%, 30px 100%, 18px 100%, 28px 100%;
+    }
+    
+    .floating-holo-text {
+        font-size: 0.7rem;
+    }
+    
+    /* Enhanced mobile hero section */
+    .hero-content {
+        padding: 20px;
+        max-width: 95%;
+    }
+    
+    .glitch-reveal {
+        font-size: 1.5rem;
+        padding: 8px 15px;
+    }
+    
+    .hero p {
+        font-size: 0.9rem;
+    }
+    
+    /* Enhance mobile console visibility */
+    .cyberpunk-console {
+        max-height: 120px;
+        margin-top: 15px;
+    }
+    
+    .console-text {
+        font-size: 0.8rem;
+        animation-duration: 12s; /* Slow down scrolling on mobile */
+    }
+}
+
+/* Add high resolution/retina display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .city-layer-1::before, .city-layer-2::before, .city-layer-3::before {
+        opacity: 1; /* Increase neon effect on high-res displays */
+    }
+    
+    .hero::before {
+        background-size: 30px 30px; /* Larger grid size for high-res displays */
+    }
+}
+
+/* Hero content container */
+.hero-content {
+    position: relative;
+    z-index: 5; /* Ensure it's above the skyline */
+    background: rgba(0, 10, 30, 0.4); /* Semi-transparent background */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    max-width: 85%;
+    margin: 0 auto;
+}
+
+.hero p {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
 } 
