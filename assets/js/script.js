@@ -507,7 +507,7 @@ document.addEventListener('DOMContentLoaded', () => {
         typeWriter();
     }
 
-    // Image viewer function
+    // Enhanced Image Viewer
     function initializeImageViewer() {
         const imageViewer = document.getElementById('imageViewer');
         const viewerImage = document.getElementById('viewerImage');
@@ -516,14 +516,25 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (!imageViewer || !viewerImage) return;
         
-        // Store current gallery context
-        let currentGallery = [];
+        let currentGallery = null;
         let currentIndex = 0;
         
         // Add click listeners to gallery images
         document.querySelectorAll('.gallery-image').forEach(image => {
             image.addEventListener('click', () => {
-                openImageViewer(image.src);
+                const projectGallery = image.closest('.project-gallery');
+                const projectName = projectGallery.dataset.project;
+                const images = projectGallery.querySelectorAll('.gallery-image');
+                
+                currentGallery = {
+                    project: projectName,
+                    images: Array.from(images).map(img => img.src)
+                };
+                currentIndex = Array.from(images).indexOf(image);
+                
+                updateViewer();
+                imageViewer.classList.add('active');
+                document.body.style.overflow = 'hidden';
             });
         });
         
@@ -540,73 +551,64 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
-        // Initialize touch events for swiping
-        handleSwipe();
-        
-        // Open image viewer with a specific image
-        function openImageViewer(imageSrc) {
-            const galleryContainer = document.querySelector('.project-gallery');
-            if (galleryContainer) {
-                // Find all images in the same gallery
-                const gallery = Array.from(galleryContainer.querySelectorAll('.gallery-image'));
-                currentGallery = gallery.map(img => img.src);
-                currentIndex = currentGallery.indexOf(imageSrc);
-                
-                // Update counter
-                currentImageIndex.textContent = currentIndex + 1;
-                totalImages.textContent = currentGallery.length;
-            } else {
-                currentGallery = [imageSrc];
-                currentIndex = 0;
-                
-                // Update counter for single image
-                currentImageIndex.textContent = '1';
-                totalImages.textContent = '1';
-            }
+        function updateViewer() {
+            if (!currentGallery) return;
             
-            // Set image and show viewer
-            viewerImage.src = imageSrc;
-            imageViewer.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling when viewer is open
-        }
-        
-        // Navigate to prev/next image
-        function navigateImages(direction) {
-            if (currentGallery.length <= 1) return;
-            
-            currentIndex = (currentIndex + direction + currentGallery.length) % currentGallery.length;
-            viewerImage.src = currentGallery[currentIndex];
+            viewerImage.src = currentGallery.images[currentIndex];
             currentImageIndex.textContent = currentIndex + 1;
+            totalImages.textContent = currentGallery.images.length;
+            
+            // Add glitch effect when changing images
+            viewerImage.style.animation = 'none';
+            viewerImage.offsetHeight; // Trigger reflow
+            viewerImage.style.animation = 'image-glitch 0.5s';
         }
         
-        // Close the image viewer
+        function navigateImages(direction) {
+            if (!currentGallery) return;
+            
+            currentIndex = (currentIndex + direction + currentGallery.images.length) % currentGallery.images.length;
+            updateViewer();
+        }
+        
         function closeImageViewer() {
             imageViewer.classList.remove('active');
-            document.body.style.overflow = ''; // Re-enable scrolling
+            document.body.style.overflow = '';
+            currentGallery = null;
         }
         
-        // Handle touch swipe for mobile
+        // Add keyboard navigation
+        document.addEventListener('keydown', e => {
+            if (!imageViewer.classList.contains('active')) return;
+            
+            if (e.key === 'ArrowLeft') {
+                navigateImages(-1);
+            } else if (e.key === 'ArrowRight') {
+                navigateImages(1);
+            } else if (e.key === 'Escape') {
+                closeImageViewer();
+            }
+        });
+        
+        // Add touch swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        imageViewer.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        imageViewer.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
         function handleSwipe() {
-            let touchstartX = 0;
-            let touchendX = 0;
-            
-            imageViewer.addEventListener('touchstart', e => {
-                touchstartX = e.changedTouches[0].screenX;
-            }, false);
-            
-            imageViewer.addEventListener('touchend', e => {
-                touchendX = e.changedTouches[0].screenX;
-                handleGesture();
-            }, false);
-            
-            function handleGesture() {
-                const threshold = 50; // Minimum distance for swipe
-                
-                if (touchendX - touchstartX > threshold) {
-                    navigateImages(-1); // Swipe left
-                } else if (touchstartX - touchendX > threshold) {
-                    navigateImages(1); // Swipe right
-                }
+            const swipeThreshold = 50;
+            if (touchEndX - touchStartX > swipeThreshold) {
+                navigateImages(-1);
+            } else if (touchStartX - touchEndX > swipeThreshold) {
+                navigateImages(1);
             }
         }
     }
@@ -972,4 +974,306 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 1000); // Check after 1 second to give time for CSS to apply
     }
+
+    // Project Gallery Navigation
+    const galleries = document.querySelectorAll('.project-gallery');
+    const viewer = document.getElementById('imageViewer');
+    const viewerImage = document.getElementById('viewerImage');
+    const currentIndex = document.getElementById('currentImageIndex');
+    const totalImages = document.getElementById('totalImages');
+    const prevButton = document.querySelector('.nav-button.prev');
+    const nextButton = document.querySelector('.nav-button.next');
+    const closeButton = document.querySelector('.close-viewer');
+
+    let currentGallery = null;
+    let currentImageIndex = 0;
+
+    galleries.forEach(gallery => {
+        const images = gallery.querySelectorAll('.gallery-image');
+        images.forEach((img, index) => {
+            img.addEventListener('click', () => {
+                currentGallery = gallery;
+                currentImageIndex = index;
+                updateViewer();
+                viewer.style.display = 'flex';
+            });
+        });
+    });
+
+    function updateViewer() {
+        const images = currentGallery.querySelectorAll('.gallery-image');
+        viewerImage.src = images[currentImageIndex].src;
+        currentIndex.textContent = currentImageIndex + 1;
+        totalImages.textContent = images.length;
+    }
+
+    prevButton.addEventListener('click', () => {
+        const images = currentGallery.querySelectorAll('.gallery-image');
+        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+        updateViewer();
+    });
+
+    nextButton.addEventListener('click', () => {
+        const images = currentGallery.querySelectorAll('.gallery-image');
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        updateViewer();
+    });
+
+    closeButton.addEventListener('click', () => {
+        viewer.style.display = 'none';
+    });
+
+    // Project Filtering
+    const filterTags = document.querySelectorAll('.filter-tag');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterTags.forEach(tag => {
+        tag.addEventListener('click', () => {
+            const filter = tag.dataset.filter;
+            filterTags.forEach(t => t.classList.remove('active'));
+            tag.classList.add('active');
+
+            projectCards.forEach(card => {
+                const cardTags = card.dataset.tags.split(' ');
+                if (filter === 'all' || cardTags.includes(filter)) {
+                    card.classList.remove('filtered-out');
+                } else {
+                    card.classList.add('filtered-out');
+                }
+            });
+        });
+    });
+
+    // Theme Customization
+    const themeCustomizer = document.createElement('div');
+    themeCustomizer.className = 'theme-customizer';
+    themeCustomizer.innerHTML = `
+        <h4>Theme Colors</h4>
+        <div class="color-picker">
+            <div class="color-option" style="background: #00ffff" data-color="#00ffff"></div>
+            <div class="color-option" style="background: #ff00ff" data-color="#ff00ff"></div>
+            <div class="color-option" style="background: #00ff00" data-color="#00ff00"></div>
+            <div class="color-option" style="background: #ffff00" data-color="#ffff00"></div>
+        </div>
+    `;
+    document.body.appendChild(themeCustomizer);
+
+    const colorOptions = document.querySelectorAll('.color-option');
+    colorOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            const color = option.dataset.color;
+            document.documentElement.style.setProperty('--neon-primary', color);
+            colorOptions.forEach(opt => opt.classList.remove('active'));
+            option.classList.add('active');
+        });
+    });
+
+    // CRT Mode Toggle
+    const crtMode = document.createElement('div');
+    crtMode.className = 'crt-mode';
+    document.body.appendChild(crtMode);
+
+    const crtToggle = document.createElement('button');
+    crtToggle.className = 'crt-toggle';
+    crtToggle.innerHTML = '<i class="fas fa-tv"></i>';
+    crtToggle.addEventListener('click', () => {
+        crtMode.classList.toggle('active');
+    });
+    document.body.appendChild(crtToggle);
+
+    // Progress Bars Animation
+    const progressBars = document.querySelectorAll('.progress-fill');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.width = entry.target.dataset.progress + '%';
+            }
+        });
+    }, { threshold: 0.5 });
+
+    progressBars.forEach(bar => observer.observe(bar));
+
+    // Achievement System
+    const achievements = {
+        'first-visit': {
+            title: 'First Visit',
+            description: 'Welcome to the portfolio!',
+            icon: 'fas fa-star'
+        },
+        'scroll-master': {
+            title: 'Scroll Master',
+            description: 'Scrolled through the entire portfolio',
+            icon: 'fas fa-scroll'
+        },
+        'theme-explorer': {
+            title: 'Theme Explorer',
+            description: 'Tried all theme colors',
+            icon: 'fas fa-palette'
+        }
+    };
+
+    let unlockedAchievements = new Set();
+
+    function showAchievement(id) {
+        if (unlockedAchievements.has(id)) return;
+        
+        const achievement = achievements[id];
+        const badge = document.createElement('div');
+        badge.className = 'achievement-badge';
+        badge.innerHTML = `
+            <div class="achievement-icon"><i class="${achievement.icon}"></i></div>
+            <h4>${achievement.title}</h4>
+            <p>${achievement.description}</p>
+        `;
+        document.body.appendChild(badge);
+        
+        setTimeout(() => badge.classList.add('show'), 100);
+        setTimeout(() => {
+            badge.classList.remove('show');
+            setTimeout(() => badge.remove(), 500);
+        }, 3000);
+        
+        unlockedAchievements.add(id);
+    }
+
+    // Check for achievements
+    showAchievement('first-visit');
+
+    let maxScroll = 0;
+    window.addEventListener('scroll', () => {
+        maxScroll = Math.max(maxScroll, window.scrollY);
+        if (maxScroll > document.body.scrollHeight - window.innerHeight - 100) {
+            showAchievement('scroll-master');
+        }
+    });
+
+    let themeChanges = 0;
+    colorOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            themeChanges++;
+            if (themeChanges >= colorOptions.length) {
+                showAchievement('theme-explorer');
+            }
+        });
+    });
+
+    // Remove Konami Code Matrix Effect
+    const matrixRain = document.getElementById('matrixRain');
+    if (matrixRain) {
+        matrixRain.remove();
+    }
+
+    // Remove unwanted elements
+    document.querySelectorAll('.achievement-badge, .crt-toggle, .theme-customizer').forEach(el => el.remove());
+
+    // Initialize new cyberpunk features
+    function initializeCyberpunkFeatures() {
+        // Remove unwanted elements
+        document.querySelectorAll('.achievement-badge, .crt-toggle, .theme-customizer').forEach(el => el.remove());
+
+        // Add scroll progress bar
+        const progressBar = document.createElement('div');
+        progressBar.className = 'scroll-progress';
+        document.body.appendChild(progressBar);
+
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + '%';
+        });
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                const sections = document.querySelectorAll('section');
+                const currentSection = Array.from(sections).find(section => {
+                    const rect = section.getBoundingClientRect();
+                    return rect.top >= 0 && rect.top <= window.innerHeight;
+                });
+                
+                if (currentSection) {
+                    const index = Array.from(sections).indexOf(currentSection);
+                    const nextIndex = e.key === 'ArrowUp' ? index - 1 : index + 1;
+                    if (nextIndex >= 0 && nextIndex < sections.length) {
+                        sections[nextIndex].scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            }
+        });
+
+        // Add 3D tilt effect to project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            });
+        });
+
+        // Add tech stack badge animations
+        document.querySelectorAll('.tech-badge').forEach(badge => {
+            badge.addEventListener('mouseover', () => {
+                badge.style.transform = 'scale(1.2) rotate(360deg)';
+            });
+            
+            badge.addEventListener('mouseleave', () => {
+                badge.style.transform = 'scale(1) rotate(0)';
+            });
+        });
+
+        // Add mobile touch gestures
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchEndX - touchStartX > swipeThreshold) {
+                // Swipe right - previous project
+                navigateProject(-1);
+            } else if (touchStartX - touchEndX > swipeThreshold) {
+                // Swipe left - next project
+                navigateProject(1);
+            }
+        }
+
+        function navigateProject(direction) {
+            const projects = document.querySelectorAll('.project-card');
+            const currentProject = Array.from(projects).find(project => {
+                const rect = project.getBoundingClientRect();
+                return rect.left >= 0 && rect.left <= window.innerWidth;
+            });
+            
+            if (currentProject) {
+                const index = Array.from(projects).indexOf(currentProject);
+                const nextIndex = (index + direction + projects.length) % projects.length;
+                projects[nextIndex].scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    }
+
+    // Initialize features when DOM is loaded
+    initializeCyberpunkFeatures();
 });
