@@ -257,7 +257,7 @@
   <section id="projects" class="projects section-bg">
     <h2>Projects</h2>
     <div class="projects-grid stagger-children">
-      <div class="project-card">
+      <div class="project-card" data-tags="fullstack react fastapi">
         <div class="project-image">
           <img src="assets/images/selection.PNG" alt="Pokemon Simulator API">
           <div class="project-overlay">
@@ -268,21 +268,19 @@
           </div>
         </div>
         <h3>Pokemon Simulator API</h3>
-        <p>Created a comprehensive Pokemon battle simulator API that allows users to select Pokemon, view their stats, and simulate battles. Features include type effectiveness calculations, stat-based damage formulas, and an interactive battle interface.</p>
+        <p>A full-stack Pokemon battle simulator with real-time mechanics. Built with FastAPI backend and React frontend, featuring turn-based combat, type advantages, and dynamic battle animations.</p>
         <div class="project-tech">
-          <span>Python</span>
-          <span>TypeScript</span>
-          <span>React</span>
-          <span>FastAPI</span>
-          <span>REST API</span>
-          <span>Game Logic</span>
+          <span class="tech-badge">FastAPI</span>
+          <span class="tech-badge">React</span>
+          <span class="tech-badge">WebSocket</span>
+          <span class="tech-badge">TypeScript</span>
         </div>
-        <div class="project-gallery">
+        <div class="project-gallery" data-project="pokemon">
           <img src="assets/images/selection.PNG" alt="Pokemon Selection Interface" class="gallery-image">
           <img src="assets/images/results.png" alt="Battle Results" class="gallery-image">
         </div>
       </div>
-      <div class="project-card">
+      <div class="project-card" data-tags="ml python data">
         <div class="project-image">
           <img src="assets/images/NBADashboard.png" alt="NBA Injury Stat Predictor">
           <div class="project-overlay">
@@ -293,18 +291,19 @@
           </div>
         </div>
         <h3>NBA Injury Stat Predictor</h3>
-        <p>Built a Python script using scikit-learn to predict player stats based on injury status and performance.</p>
+        <p>A machine learning model that analyzes NBA player statistics and injury history to predict potential injury risks. Features data scraping from NBA API and interactive visualizations.</p>
         <div class="project-tech">
-          <span>Python</span>
-          <span>scikit-learn</span>
-          <span>Data Analysis</span>
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">Scikit-learn</span>
+          <span class="tech-badge">Dash</span>
+          <span class="tech-badge">Web Scraping</span>
         </div>
-        <div class="project-gallery">
+        <div class="project-gallery" data-project="nba">
           <img src="assets/images/NBADashboard.png" alt="NBA Dashboard" class="gallery-image">
           <img src="assets/images/NbaScottieBarnesStats.png" alt="Scottie Barnes Stats Chart" class="gallery-image">
         </div>
       </div>
-      <div class="project-card">
+      <div class="project-card" data-tags="ai music api">
         <div class="project-image">
           <img src="assets/images/Spotify2.png" alt="Spotify Playlist Generator">
           <div class="project-overlay">
@@ -315,13 +314,14 @@
           </div>
         </div>
         <h3>Spotify Playlist Generator</h3>
-        <p>Integrated YouTube and Spotify APIs to create personalized playlists based on voice analysis.</p>
+        <p>An AI-powered music recommendation system that creates personalized playlists based on user preferences. Integrates with YouTube and Spotify APIs to provide a seamless music discovery experience.</p>
         <div class="project-tech">
-          <span>Python</span>
-          <span>API Integration</span>
-          <span>Voice Analysis</span>
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">Spotify API</span>
+          <span class="tech-badge">YouTube API</span>
+          <span class="tech-badge">NLP</span>
         </div>
-        <div class="project-gallery">
+        <div class="project-gallery" data-project="spotify">
           <img src="assets/images/Spotify2.png" alt="Spotify Playlist Generator" class="gallery-image">
           <img src="assets/images/Spotify3.png" alt="Spotify Playlist Generator" class="gallery-image">
         </div>
@@ -330,31 +330,30 @@
   </section>
 
   <!-- Education Section -->
-  <section id="education" class="education">
+  <section id="education" class="stagger-children">
     <h2>Education</h2>
-    <div class="education-item">
-      <div class="education-content">
-        <img src="assets/images/University_of_Toronto-Logo.png" alt="University of Toronto Logo" class="education-logo">
-        <div class="education-details">
-          <h3>University of Toronto</h3>
-          <p class="degree"><strong>B.S. in Computer Science & Statistics</strong> | Graduated Dec 2023</p>
-          <p class="coursework">Related Coursework: Data Structures & Algorithms, Machine Learning, Artificial Intelligence, Object-Oriented Programming.</p>
-          <div class="education-achievements">
-            <div class="achievement">
-              <i class="fas fa-chalkboard-teacher"></i>
-              <span>Teaching Assistant</span>
+    <div class="education-container">
+        <div class="education-card">
+            <div class="education-logo">
+                <img src="assets/images/University_of_Toronto-Logo.png" alt="University of Toronto Logo" style="width: 150px; height: auto;">
             </div>
-            <div class="achievement">
-              <i class="fas fa-flask"></i>
-              <span>Research Assistant</span>
+            <div class="education-content">
+                <h3>University of Toronto</h3>
+                <h4>Honours Bachelor of Science</h4>
+                <p class="education-details">
+                    <span class="degree">Computer Science & Statistics Major, Mathematics Minor</span>
+                    <span class="year">2019 - 2023</span>
+                </p>
+                <div class="education-highlights">
+                    <ul>
+                        <li><span class="highlight-icon"><i class="fas fa-graduation-cap"></i></span>Relevant Coursework: Data Structures & Algorithms, Software Engineering, Machine Learning, Database Systems</li>
+                        <li><span class="highlight-icon"><i class="fas fa-chalkboard-teacher"></i></span>Teaching Assistant: Introduction to Programming, Mathematical Combinatorics</li>
+                        <li><span class="highlight-icon"><i class="fas fa-basketball-ball"></i></span>Varsity Basketball Team: Analytics Lead, Statistical Analysis</li>
+                        <li><span class="highlight-icon"><i class="fas fa-flask"></i></span>Research Assistant: Machine Learning Lab</li>
+                    </ul>
+                </div>
             </div>
-            <div class="achievement">
-              <i class="fas fa-basketball-ball"></i>
-              <span>Varsity Basketball Analytics Team Lead</span>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
   </section>
 
@@ -420,9 +419,9 @@
 
   <!-- Image Viewer Modal -->
   <div class="image-viewer" id="imageViewer">
-    <span class="close-viewer" data-action="close">&times;</span>
-    <button class="nav-button prev" data-action="prev"><i class="fas fa-chevron-left"></i></button>
-    <button class="nav-button next" data-action="next"><i class="fas fa-chevron-right"></i></button>
+    <button class="close-viewer" data-action="close">×</button>
+    <button class="nav-button prev" data-action="prev">←</button>
+    <button class="nav-button next" data-action="next">→</button>
     <div class="image-container">
       <img src="" alt="Project Screenshot" id="viewerImage">
     </div>
